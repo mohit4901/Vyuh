@@ -1,0 +1,32 @@
+# VYUH — AI Fraud Ring & Network Sentinel
+# Razorpay AI Buildathon 2026 · Track 02
+
+# Core ML
+lightgbm>=4.0.0
+scikit-learn>=1.3.0
+pandas>=2.0.0
+numpy>=1.24.0
+xgboost>=2.0.0
+
+# Deep Learning
+torch>=2.0.0
+peft>=0.7.0
+
+# Graph Processing
+networkx>=3.1
+python-louvain>=0.16
+
+# Backend API → Express.js (Node.js) — see backend/package.json
+# Python side only exposes ML inference via subprocess / child_process
+
+# Visualization & Utilities
+matplotlib>=3.7.0
+seaborn>=0.12.0
+tqdm>=4.65.0
+
+# Dataset Download
+opendatasets>=0.1.22
+kaggle>=1.6.0
+
+# LLM
+google-generativeai>=0.8.0

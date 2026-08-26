@@ -1,0 +1,39 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Data files (too large for git)
+data/raw/
+data/processed/
+data/graphs/
+*.csv
+*.pkl
+*.joblib
+
+# Model checkpoints
+models/checkpoints/
+*.pt
+*.pth
+*.bin
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Kaggle
+kaggle.json
