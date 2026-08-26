@@ -1,0 +1,89 @@
+{
+  "model": "M1_LightGBM_Baseline",
+  "pr_auc": 0.4526505038461525,
+  "roc_auc": 0.8494074659711393,
+  "best_threshold": 0.7,
+  "best_f1": 0.46809874959923053,
+  "top_features": [
+    {
+      "feature": "TransactionDT",
+      "importance": 4376
+    },
+    {
+      "feature": "card1",
+      "importance": 3682
+    },
+    {
+      "feature": "addr1",
+      "importance": 3129
+    },
+    {
+      "feature": "card1_amt_mean",
+      "importance": 3107
+    },
+    {
+      "feature": "card1_txn_count",
+      "importance": 2984
+    },
+    {
+      "feature": "card1_amt_std",
+      "importance": 2813
+    },
+    {
+      "feature": "card2_txn_count",
+      "importance": 2425
+    },
+    {
+      "feature": "card2",
+      "importance": 2406
+    },
+    {
+      "feature": "card1_amt_zscore",
+      "importance": 2224
+    },
+    {
+      "feature": "C13",
+      "importance": 2220
+    },
+    {
+      "feature": "dayofmonth",
+      "importance": 2156
+    },
+    {
+      "feature": "card5_amt_zscore",
+      "importance": 2097
+    },
+    {
+      "feature": "D15",
+      "importance": 2055
+    },
+    {
+      "feature": "card2_amt_zscore",
+      "importance": 1958
+    },
+    {
+      "feature": "TransactionAmt",
+      "importance": 1933
+    },
+    {
+      "feature": "card2_amt_mean",
+      "importance": 1930
+    },
+    {
+      "feature": "card1_unique_devices",
+      "importance": 1857
+    },
+    {
+      "feature": "card2_amt_std",
+      "importance": 1801
+    },
+    {
+      "feature": "card1_unique_addrs",
+      "importance": 1781
+    },
+    {
+      "feature": "card1_unique_emails",
+      "importance": 1750
+    }
+  ]
+}

@@ -1,0 +1,623 @@
+[
+  {
+    "data": {
+      "id": "card_2928",
+      "label": "Card: 2928",
+      "type": "card",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472629",
+      "label": "Order #472629",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 12.436
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472510",
+      "label": "Order #472510",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 59.636
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472628",
+      "label": "Order #472628",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 12.436
+    }
+  },
+  {
+    "data": {
+      "id": "email_23",
+      "label": "Email: 23",
+      "type": "email",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472514",
+      "label": "Order #472514",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 59.636
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472504",
+      "label": "Order #472504",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 147.552
+    }
+  },
+  {
+    "data": {
+      "id": "card_9917",
+      "label": "Card: 9917",
+      "type": "card",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "card_10023",
+      "label": "Card: 10023",
+      "type": "card",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "dev_1598",
+      "label": "Device: 1598",
+      "type": "device",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472630",
+      "label": "Order #472630",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 12.436
+    }
+  },
+  {
+    "data": {
+      "id": "email_16",
+      "label": "Email: 16",
+      "type": "email",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "card_5123",
+      "label": "Card: 5123",
+      "type": "card",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472468",
+      "label": "Order #472468",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 49.0
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472627",
+      "label": "Order #472627",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 12.436
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472507",
+      "label": "Order #472507",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 59.636
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472432",
+      "label": "Order #472432",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 33.261
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472639",
+      "label": "Order #472639",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 15.616
+    }
+  },
+  {
+    "data": {
+      "id": "card_15944",
+      "label": "Card: 15944",
+      "type": "card",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "card_9500",
+      "label": "Card: 9500",
+      "type": "card",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472560",
+      "label": "Order #472560",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 319.95
+    }
+  },
+  {
+    "data": {
+      "id": "card_16132",
+      "label": "Card: 16132",
+      "type": "card",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "email_19",
+      "label": "Email: 19",
+      "type": "email",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "email_32",
+      "label": "Email: 32",
+      "type": "email",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472499",
+      "label": "Order #472499",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 147.552
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472578",
+      "label": "Order #472578",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 315.95
+    }
+  },
+  {
+    "data": {
+      "id": "dev_1467",
+      "label": "Device: 1467",
+      "type": "device",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "card_9300",
+      "label": "Card: 9300",
+      "type": "card",
+      "isFraud": false,
+      "amount": 0.0
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472635",
+      "label": "Order #472635",
+      "type": "transaction",
+      "isFraud": true,
+      "amount": 12.436
+    }
+  },
+  {
+    "data": {
+      "id": "card_2928_txn_472560",
+      "source": "card_2928",
+      "target": "txn_472560",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472629_card_9917",
+      "source": "txn_472629",
+      "target": "card_9917",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472629_dev_1467",
+      "source": "txn_472629",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472629_email_16",
+      "source": "txn_472629",
+      "target": "email_16",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472510_card_15944",
+      "source": "txn_472510",
+      "target": "card_15944",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472510_dev_1467",
+      "source": "txn_472510",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472510_email_19",
+      "source": "txn_472510",
+      "target": "email_19",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472628_card_9917",
+      "source": "txn_472628",
+      "target": "card_9917",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472628_dev_1467",
+      "source": "txn_472628",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472628_email_16",
+      "source": "txn_472628",
+      "target": "email_16",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "email_23_txn_472578",
+      "source": "email_23",
+      "target": "txn_472578",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472514_card_15944",
+      "source": "txn_472514",
+      "target": "card_15944",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472514_dev_1467",
+      "source": "txn_472514",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472514_email_19",
+      "source": "txn_472514",
+      "target": "email_19",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472504_card_16132",
+      "source": "txn_472504",
+      "target": "card_16132",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472504_dev_1467",
+      "source": "txn_472504",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472504_email_16",
+      "source": "txn_472504",
+      "target": "email_16",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "card_9917_txn_472627",
+      "source": "card_9917",
+      "target": "txn_472627",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "card_9917_txn_472630",
+      "source": "card_9917",
+      "target": "txn_472630",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "card_9917_txn_472635",
+      "source": "card_9917",
+      "target": "txn_472635",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "card_9917_txn_472639",
+      "source": "card_9917",
+      "target": "txn_472639",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "card_10023_txn_472578",
+      "source": "card_10023",
+      "target": "txn_472578",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "dev_1598_txn_472432",
+      "source": "dev_1598",
+      "target": "txn_472432",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "dev_1598_txn_472468",
+      "source": "dev_1598",
+      "target": "txn_472468",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "dev_1598_txn_472560",
+      "source": "dev_1598",
+      "target": "txn_472560",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "dev_1598_txn_472578",
+      "source": "dev_1598",
+      "target": "txn_472578",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472630_dev_1467",
+      "source": "txn_472630",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472630_email_16",
+      "source": "txn_472630",
+      "target": "email_16",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "email_16_txn_472432",
+      "source": "email_16",
+      "target": "txn_472432",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "email_16_txn_472468",
+      "source": "email_16",
+      "target": "txn_472468",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "email_16_txn_472499",
+      "source": "email_16",
+      "target": "txn_472499",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "email_16_txn_472627",
+      "source": "email_16",
+      "target": "txn_472627",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "email_16_txn_472635",
+      "source": "email_16",
+      "target": "txn_472635",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "email_16_txn_472639",
+      "source": "email_16",
+      "target": "txn_472639",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "card_5123_txn_472499",
+      "source": "card_5123",
+      "target": "txn_472499",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472468_card_9500",
+      "source": "txn_472468",
+      "target": "card_9500",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472627_dev_1467",
+      "source": "txn_472627",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472507_card_15944",
+      "source": "txn_472507",
+      "target": "card_15944",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472507_dev_1467",
+      "source": "txn_472507",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472507_email_19",
+      "source": "txn_472507",
+      "target": "email_19",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472432_card_9300",
+      "source": "txn_472432",
+      "target": "card_9300",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472639_dev_1467",
+      "source": "txn_472639",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472560_email_32",
+      "source": "txn_472560",
+      "target": "email_32",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "txn_472499_dev_1467",
+      "source": "txn_472499",
+      "target": "dev_1467",
+      "label": "shared_link"
+    }
+  },
+  {
+    "data": {
+      "id": "dev_1467_txn_472635",
+      "source": "dev_1467",
+      "target": "txn_472635",
+      "label": "shared_link"
+    }
+  }
+]

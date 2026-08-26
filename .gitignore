@@ -15,13 +15,16 @@ backend/node_modules/
 # Data files (too large for git)
 data/raw/
 data/processed/
-data/graphs/
 *.csv
 *.pkl
 *.joblib
+!data/graphs/*.json
 
 # Model checkpoints
-models/checkpoints/
+models/checkpoints/*.pkl
+models/checkpoints/*.pt
+models/checkpoints/*.pth
+models/checkpoints/*.bin
 *.pt
 *.pth
 *.bin

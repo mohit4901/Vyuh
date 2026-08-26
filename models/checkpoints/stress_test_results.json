@@ -1,0 +1,77 @@
+[
+  {
+    "slice_name": "Slice A: Standard Temporal Future",
+    "description": "General out-of-time distribution shift",
+    "sample_count": 118108,
+    "fraud_count": 4064,
+    "lgbm_metrics": {
+      "pr_auc": 0.4608,
+      "roc_auc": 0.8533,
+      "precision": 0.3752,
+      "recall": 0.4877,
+      "f1": 0.4241,
+      "count": 118108,
+      "fraud_count": 4064
+    },
+    "vyuh_metrics": {
+      "pr_auc": 0.4588,
+      "roc_auc": 0.8634,
+      "precision": 0.2701,
+      "recall": 0.562,
+      "f1": 0.3649,
+      "count": 118108,
+      "fraud_count": 4064
+    },
+    "delta_pr_auc_pct": "+-0.4%"
+  },
+  {
+    "slice_name": "Slice B: Cold Entities (Unseen Cards)",
+    "description": "No prior transaction history for card",
+    "sample_count": 1293,
+    "fraud_count": 56,
+    "lgbm_metrics": {
+      "pr_auc": 0.6469,
+      "roc_auc": 0.94,
+      "precision": 0.41,
+      "recall": 0.7321,
+      "f1": 0.5256,
+      "count": 1293,
+      "fraud_count": 56
+    },
+    "vyuh_metrics": {
+      "pr_auc": 0.644,
+      "roc_auc": 0.9384,
+      "precision": 0.2791,
+      "recall": 0.8571,
+      "f1": 0.4211,
+      "count": 1293,
+      "fraud_count": 56
+    },
+    "delta_pr_auc_pct": "+-0.4%"
+  },
+  {
+    "slice_name": "Slice C: Coordinated Rings & Syndicates",
+    "description": "Multi-account clusters & device bursts",
+    "sample_count": 118108,
+    "fraud_count": 4064,
+    "lgbm_metrics": {
+      "pr_auc": 0.4608,
+      "roc_auc": 0.8533,
+      "precision": 0.3752,
+      "recall": 0.4877,
+      "f1": 0.4241,
+      "count": 118108,
+      "fraud_count": 4064
+    },
+    "vyuh_metrics": {
+      "pr_auc": 0.4588,
+      "roc_auc": 0.8634,
+      "precision": 0.2701,
+      "recall": 0.562,
+      "f1": 0.3649,
+      "count": 118108,
+      "fraud_count": 4064
+    },
+    "delta_pr_auc_pct": "+-0.4%"
+  }
+]

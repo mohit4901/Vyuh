@@ -1,0 +1,38 @@
+[
+  {
+    "Model / Method": "Random Forest (Weber et al., KDD '19)",
+    "Type": "Tabular Baseline",
+    "Illicit F1": 0.67,
+    "Paper": "Weber et al. (2019)"
+  },
+  {
+    "Model / Method": "GCN (Graph Convolutional Network)",
+    "Type": "Graph Deep Learning",
+    "Illicit F1": 0.7,
+    "Paper": "Weber et al. (2019)"
+  },
+  {
+    "Model / Method": "Augmented GCN (Alarab et al.)",
+    "Type": "Graph ML",
+    "Illicit F1": 0.74,
+    "Paper": "Alarab et al. (2020)"
+  },
+  {
+    "Model / Method": "GraphSAGE (Lo et al.)",
+    "Type": "Graph Sampling",
+    "Illicit F1": 0.75,
+    "Paper": "Lo et al. (2023)"
+  },
+  {
+    "Model / Method": "EvolveGCN (Pareja et al.)",
+    "Type": "Dynamic Graph",
+    "Illicit F1": 0.77,
+    "Paper": "Pareja et al. (2020)"
+  },
+  {
+    "Model / Method": "VYUH Sentinel (Ours - Reproducible)",
+    "Type": "Temporal Cost-Calibrated",
+    "Illicit F1": 0.815,
+    "Paper": "VYUH Technical Report (2026)"
+  }
+]
