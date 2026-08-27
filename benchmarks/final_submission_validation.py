@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-VYUH 2.1 — Final Automated Submission & Integrity Validation Suite
+VYUH — Final Automated Submission & Integrity Validation Suite
 ==================================================================
 Runs rigorous, automated sanity checks on every component of the repository:
   1. Dataset & Temporal Split Integrity (590,540 rows, 472k train / 118k test, chronological gap)
@@ -34,7 +34,7 @@ CHECKPOINT_DIR = PROJECT_ROOT / "models" / "checkpoints"
 
 def validate_submission():
     print("=" * 95)
-    print("🔍 VYUH 2.1 — FINAL AUTOMATED SUBMISSION VALIDATION SUITE")
+    print("🔍 VYUH — FINAL AUTOMATED SUBMISSION VALIDATION SUITE")
     print("=" * 95)
 
     all_passed = True
@@ -146,7 +146,7 @@ def validate_submission():
     print("=" * 115)
 
     if all_passed:
-        print("\n🎉 ALL AUDIT CHECKS PASSED: VYUH 2.1 is 100% verified, consistent, and submission-ready.")
+        print("\n🎉 ALL AUDIT CHECKS PASSED: VYUH is 100% verified, consistent, and submission-ready.")
         return 0
     else:
         print("\n🚨 AUDIT CHECKS FAILED: Review the discrepancies above.")

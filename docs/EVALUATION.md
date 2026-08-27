@@ -1,4 +1,4 @@
-# VYUH 2.1 — Comprehensive Evaluation & Statistical Report
+# VYUH — Comprehensive Evaluation & Statistical Report
 
 **Dataset**: IEEE-CIS Fraud Detection (590,540 total historical transactions)  
 **Split**: Strict Chronological Holdout (472,432 Train / 118,108 Test, 58-second gap)  

@@ -1,4 +1,4 @@
-# VYUH 2.1 — Adversarial Stress Testing & Known Limitations
+# VYUH — Adversarial Stress Testing & Known Limitations
 
 **Canonical Artifact**: `models/checkpoints/adversarial_attack_characterization.json`
 

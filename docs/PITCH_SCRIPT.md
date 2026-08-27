@@ -1,4 +1,4 @@
-# VYUH 2.1 — 5-Minute Razorpay AI Buildathon Pitch Script
+# VYUH — 5-Minute Razorpay AI Buildathon Pitch Script
 
 **Track**: Track 02: AI Risk Manager  
 **Title**: VYUH (व्यूह) — Temporal Relational Fraud Intelligence

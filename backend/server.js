@@ -1,5 +1,5 @@
 /**
- * VYUH 2.0 — Enterprise REST API Server
+ * VYUH — Enterprise REST API Server
  * Razorpay AI Buildathon 2026 · Track 02: AI Risk Manager
  */
 
@@ -36,11 +36,11 @@ app.use(express.static(frontendPath));
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'healthy',
-    system: 'VYUH 2.0 AI Risk Manager & Forensic Copilot',
-    version: '2.0.0',
+    system: 'VYUH AI Risk Manager & Forensic Copilot',
+    version: '2.1.0',
     track: 'Track 02: AI Risk Manager',
     mode: 'Strictly Defense-Only',
-    inferenceEngine: 'LightGBM + Louvain Network Sentinel + Python Live Microservice (Port 5001)',
+    inferenceEngine: 'Joint 23-Feature GBDT + Python Live Microservice (Port 5001)',
     timestamp: new Date().toISOString()
   });
 });
@@ -217,7 +217,7 @@ app.use((req, res) => {
 // Start Server
 app.listen(PORT, () => {
   console.log('====================================================');
-  console.log(`🛡️  VYUH 2.0 AI Risk Manager REST API Live on Port ${PORT}`);
+  console.log(`🛡️  VYUH AI Risk Manager REST API Live on Port ${PORT}`);
   console.log(`🌐 Dashboard: http://localhost:${PORT}`);
   console.log(`📊 Health Endpoint: http://localhost:${PORT}/api/health`);
   console.log('====================================================');

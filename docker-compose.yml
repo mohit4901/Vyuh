@@ -1,4 +1,4 @@
-# VYUH 2.0 — Production Multi-Service Container Setup
+# VYUH — Production Multi-Service Container Setup
 version: '3.8'
 
 services:

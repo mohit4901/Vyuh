@@ -12,7 +12,8 @@ Saved in: models/checkpoints/plots/
 """
 
 import os
-import sys
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import json
 import warnings
 from pathlib import Path

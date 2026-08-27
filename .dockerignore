@@ -1,0 +1,36 @@
+# Git and local environment
+.git/
+.gitignore
+.venv/
+venv/
+env/
+
+# Node modules and build output
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Large raw datasets (downloaded on-demand or mounted)
+data/raw/
+data/processed/
+
+# Python byte-code and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.matplotlib/
+
+# IDE and OS metadata
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets and local configurations
+.env
+.env.local
+.env.*.local

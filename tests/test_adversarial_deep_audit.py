@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-VYUH 2.0 — 7-Gate Deep Adversarial Stress & Robustness Audit Suite
+VYUH 2.1 — 7-Gate Deep Adversarial Stress & Robustness Audit Suite
 ==================================================================
 Covers:
   Gate 1: Live Python Microservice Process Kill & Safe Fail-Closed Recovery
@@ -14,6 +14,8 @@ Covers:
 
 import sys
 import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import time
 import json
 import signal

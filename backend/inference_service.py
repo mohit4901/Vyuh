@@ -271,7 +271,7 @@ class LiveEntityGraph:
 
 class ModelManager:
     def __init__(self):
-        print("🧠 Initializing VYUH 2.1 In-Memory Inference & Dynamic Graph Engine...")
+        print("🧠 Initializing VYUH In-Memory Inference & Dynamic Graph Engine...")
         self.live_graph = LiveEntityGraph()
         self.feature_store = RollingFeatureStore()
         self.online_model = None

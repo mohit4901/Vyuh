@@ -22,7 +22,7 @@ export default function Header({ activeTab, setActiveTab }) {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-lg font-bold tracking-tight text-white font-sans flex items-center gap-1.5">
-                VYUH <span className="text-cyan-400 font-mono font-medium text-sm">(व्यूह) 2.1</span>
+                VYUH <span className="text-cyan-400 font-mono font-medium text-sm">(व्यूह)</span>
               </h1>
               <span className="badge badge-cyan text-[10px] py-0.5">Track 02: AI Risk Manager</span>
             </div>

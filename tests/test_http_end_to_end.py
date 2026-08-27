@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-VYUH 2.0 — End-to-End Public HTTP REST API Test
+VYUH 2.1 — End-to-End Public HTTP REST API Test
 ===============================================
 Spawns both:
   1. Python Live Inference Microservice (Port 5001)
@@ -18,13 +18,15 @@ import urllib.request
 import subprocess
 import signal
 import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 
 def run_http_e2e():
     print("=" * 85)
-    print("🌐 VYUH 2.0 — END-TO-END HTTP REST API INTEGRATION AUDIT")
+    print("🌐 VYUH 2.1 — END-TO-END HTTP REST API INTEGRATION AUDIT")
     print("=" * 85)
 
     python_proc = None
