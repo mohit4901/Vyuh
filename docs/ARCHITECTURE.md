@@ -102,8 +102,12 @@ In earlier development, a 2-stage hierarchical stacking architecture was tested 
 
 ## 5. Decision Policy & Cost Calibration
 
-The decision gateway optimizes expected business loss:
-$$\mathcal{L}(\text{Action}) = \begin{cases} P_{\text{final}} \times \text{Amount} & \text{if ALLOW} \\ \text{Cost}_{\text{stepup}} \approx ₹22 & \text{if STEP-UP} \\ \text{Cost}_{\text{review}} \approx ₹132.50 & \text{if REVIEW} \end{cases}$$
+$$\mathcal{L}(\text{Action}) = \begin{cases} P_{\text{final}} \times \text{Amount}, & \text{for ALLOW} \\ C_{\text{stepup}}, & \text{for STEP-UP AUTH} \\ C_{\text{review}}, & \text{for FLAG HUMAN REVIEW} \end{cases}$$
+
+where:
+* $\mathcal{L}(\text{ALLOW}) = P_{\text{final}} \times \text{Amount}$ (Expected fraud loss exposure)
+* $C_{\text{stepup}} \approx \text{INR 22.00}$ (Authentication friction and OTP dispatch overhead)
+* $C_{\text{review}} \approx \text{INR 132.50}$ (Forensic analyst manual investigation overhead)
 
 * **ALLOW** ($P_{\text{final}} < 0.15$): Frictionless 1-click checkout committed to immutable audit trail.
 * **STEP-UP AUTH** ($0.15 \le P_{\text{final}} < 0.25$): Non-destructive challenge (biometric/OTP) for moderate sharing.

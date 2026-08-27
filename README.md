@@ -366,12 +366,20 @@ Measured across 500 requests on local single-core CPU microservice execution (`m
 
 Model probability is mapped to economic action using an asymmetric cost matrix balancing fraud loss against customer checkout friction:
 
-$$\text{Expected Loss}(\text{Action}) = \begin{cases} P_{\text{final}} \times \text{Amount} & \text{if ALLOW (Potential Chargeback)} \\ \text{Cost}_{\text{stepup}} \approx ₹22.00 & \text{if STEP-UP (Friction & OTP Cost)} \\ \text{Cost}_{\text{review}} \approx ₹132.50 & \text{if REVIEW (Manual Forensic Review Cost)} \end{cases}$$
+$$\mathcal{L}(\text{Action}) = \begin{cases} P_{\text{final}} \times \text{Amount}, & \text{for ALLOW} \\ C_{\text{stepup}}, & \text{for STEP-UP AUTH} \\ C_{\text{review}}, & \text{for FLAG HUMAN REVIEW} \end{cases}$$
+
+where:
+* $\mathcal{L}(\text{ALLOW}) = P_{\text{final}} \times \text{Amount}$ (Expected fraud loss exposure)
+* $C_{\text{stepup}} \approx \text{INR 22.00}$ (Authentication friction and OTP dispatch overhead)
+* $C_{\text{review}} \approx \text{INR 132.50}$ (Forensic analyst manual investigation overhead)
 
 ### Decision Threshold Policy:
-* **`ALLOW`** ($P_{\text{final}} < 0.15$): Low risk. Frictionless 1-click checkout committed to immutable audit trail.
-* **`STEP-UP_AUTH`** ($0.15 \le P_{\text{final}} < 0.25$): Moderate relational sharing. Non-destructive 2FA/biometric step-up challenge.
-* **`FLAG_HUMAN_REVIEW`** ($P_{\text{final}} \ge 0.25$): High risk / coordinated abuse. Suspends settlement and generates analyst forensic brief.
+
+| Gateway Action | Cost Formulation | Economic Policy Range | Operational Workflow |
+| :--- | :--- | :---: | :--- |
+| **`ALLOW`** | $\mathcal{L} = P_{\text{final}} \times \text{Amount}$ | $P_{\text{final}} < 0.15$ | Clean transaction profile verified; frictionless 1-click checkout. |
+| **`STEP_UP_AUTH`** | $C_{\text{stepup}} \approx \text{INR 22.00}$ | $0.15 \le P_{\text{final}} < 0.25$ | Moderate relational risk; non-destructive 2FA/biometric verification. |
+| **`FLAG_HUMAN_REVIEW`** | $C_{\text{review}} \approx \text{INR 132.50}$ | $P_{\text{final}} \ge 0.25$ | Coordinated syndicate abuse; flags settlement with forensic brief. |
 
 ---
 
