@@ -76,12 +76,26 @@ def print_banner():
 {C_CYAN}{C_BOLD} ╔════════════════════════════════════════════════════════════════════════════════════════════╗
  ║   ██╗   ██╗██╗   ██╗██╗   ██╗██╗  ██╗   {C_GREEN}TEMPORAL RELATIONAL FRAUD INTELLIGENCE GATEWAY{C_CYAN}    ║
  ║   ██║   ██║╚██╗ ██╔╝██║   ██║██║  ██║   {C_WHITE}Razorpay AI Buildathon 2026 · Track 02 (AI Risk){C_CYAN}  ║
- ║   ██║   ██║ ╚████╔╝ ██║   ██║███████║   {C_YELLOW}Single-Core Inference: P50 = 7.46ms (Sub-10ms){C_CYAN}   ║
- ║   ╚██╗ ██╔╝  ╚██╔╝  ██║   ██║██╔══██║   {C_MAGENTA}10 Tabular + 13 Graph Features ──► Joint GBDT{C_CYAN}    ║
- ║    ╚████╔╝    ██║   ╚██████╔╝██║  ██║   {C_PURPLE}Bootstrap ΔPR-AUC Lift: +0.0333 (+29.6% Rel){C_CYAN}     ║
+ ║   ██║   ██║ ╚████╔╝ ██║   ██║███████║   {C_YELLOW}Live Sub-10ms Inference Engine · Single-Core CPU{C_CYAN} ║
+ ║   ╚██╗ ██╔╝  ╚██╔╝  ██║   ██║██╔══██║   {C_MAGENTA}23-Feature Joint GBDT (10 Tabular + 13 Relational){C_CYAN}║
+ ║    ╚████╔╝    ██║   ╚██████╔╝██║  ██║   {C_PURPLE}Bootstrap PR-AUC Lift: +0.0333 (+29.6% Relative){C_CYAN} ║
  ╚════════════════════════════════════════════════════════════════════════════════════════════╝{C_RESET}
- {C_GRAY}◆ {C_WHITE}{C_BOLD}Core Scientific Thesis:{C_RESET} {C_YELLOW}{C_ITALIC}"The incoming transaction didn't change. The relational context did."{C_RESET}
- ──────────────────────────────────────────────────────────────────────────────────────────────"""
+
+ {C_GREEN_BG}{C_WHITE}{C_BOLD}  ● SYSTEM ACTIVATED  {C_RESET} {C_GREEN}{C_BOLD}Live In-Memory Graph & Serialized GBDT Checkpoints Ready for Evaluation{C_RESET}
+
+{C_CYAN}╭── 🧠 EXECUTIVE SUMMARY & PROBLEM STATEMENT ───────────────────────────────────────────╮
+│  {C_RED}{C_BOLD}🚨 THE PROBLEM:{C_RESET} {C_WHITE}Conventional tabular fraud detectors evaluate each transaction in isolation.{C_RESET}
+│     {C_GRAY}Coordinated carding syndicates exploit this by making each stolen card payment (e.g. ₹499){C_RESET}
+│     {C_GRAY}look perfectly normal in isolation (P_tabular ≈ 3.8%), bypassing standard rule engines.{C_RESET}
+│                                                                                        │
+│  {C_GREEN}{C_BOLD}💡 THE SOLUTION (VYUH):{C_RESET} {C_WHITE}VYUH contextualizes incoming transactions in a live bipartite graph,{C_RESET}
+│     {C_GRAY}extracting 13 strict temporal velocity features (t < T_i) without future data leakage.{C_RESET}
+│     {C_GRAY}Joint 23-Feature GBDT (M3) restores cross-domain splits for institutional-grade defense.{C_RESET}
+│                                                                                        │
+│  {C_YELLOW}{C_BOLD}📈 MEASURED IMPACT:{C_RESET} {C_CYAN}{C_BOLD}+29.6% PR-AUC Lift{C_RESET} {C_GRAY}(0.1124 ──► 0.1456, 95% CI: [+0.0247, +0.0418]){C_RESET}
+│     {C_GRAY}with single-core CPU latency of {C_GREEN}{C_BOLD}P50 = 7.46ms{C_RESET}{C_GRAY}, fitting seamlessly into sub-10ms payment SLAs.{C_RESET}
+╰────────────────────────────────────────────────────────────────────────────────────────╯
+ {C_GRAY}◆ {C_WHITE}{C_BOLD}Signature Thesis:{C_RESET} {C_YELLOW}{C_ITALIC}"The incoming transaction didn't change. The relational context did."{C_RESET}"""
     print(banner)
 
 def print_box_header(title, icon="◈"):
