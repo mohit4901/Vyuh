@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-VYUH — 55M Parameter Sequence Transformer with LoRA
-===================================================
+VYUH — 27.2M Parameter Sequence Transformer with LoRA
+=====================================================
 A specialized Financial Sequence Transformer architecture designed for
 multi-event fraud ring reasoning and defense-only action policy.
 
 Specifications:
   - Backbone: 8 Transformer Encoder Layers, 8 Attention Heads, d_model = 512, d_ff = 2048
-  - Total Parameters: ~55.2 Million
-  - Trainable LoRA Adapters: Rank r = 16, Alpha α = 32 (~2.4 Million trainable weights)
+  - Total Parameters: 27,173,764 (~27.2 Million)
+  - Trainable LoRA Adapters: Rank r = 16, Alpha α = 32 (~1.97 Million trainable weights)
   - Action Head: 3 Bounded Actions [0: Allow & Log, 1: Step-Up KYC, 2: Flag for Human Review]
   - Evidence Vector: Latent embedding for plain-English investigation brief generation
 """
@@ -99,7 +99,7 @@ class TransformerBlockWithLoRA(nn.Module):
 
 class VYUHTransformer55M(nn.Module):
     """
-    VYUH 55M Parameter Financial Transformer Backbone.
+    VYUH 27.2M Parameter Financial Transformer Backbone.
     Processes historical sequence tokens + continuous features to output risk & actions.
     """
     def __init__(self, input_dim=481, d_model=512, nhead=8, num_layers=8, d_ff=2048, 

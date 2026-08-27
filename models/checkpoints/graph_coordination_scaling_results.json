@@ -1,0 +1,67 @@
+[
+  {
+    "level": "Level 1: Isolated Hardware (1 Acc/Dev)",
+    "k_accounts": 1,
+    "p_tabular": 0.0554,
+    "p_graph": 0.0069,
+    "p_final": 0.0368,
+    "dominant_action": "ALLOW",
+    "action_breakdown": {
+      "ALLOW": 1,
+      "STEP_UP": 0,
+      "REVIEW": 0
+    }
+  },
+  {
+    "level": "Level 2: Low Coordination (2 Acc/Dev)",
+    "k_accounts": 2,
+    "p_tabular": 0.0554,
+    "p_graph": 0.0067,
+    "p_final": 0.0359,
+    "dominant_action": "ALLOW",
+    "action_breakdown": {
+      "ALLOW": 2,
+      "STEP_UP": 0,
+      "REVIEW": 0
+    }
+  },
+  {
+    "level": "Level 3: Moderate Coordination (3 Acc/Dev)",
+    "k_accounts": 3,
+    "p_tabular": 0.0554,
+    "p_graph": 0.0036,
+    "p_final": 0.0331,
+    "dominant_action": "ALLOW",
+    "action_breakdown": {
+      "ALLOW": 3,
+      "STEP_UP": 0,
+      "REVIEW": 0
+    }
+  },
+  {
+    "level": "Level 4: Syndicate Cluster (5 Acc/Dev)",
+    "k_accounts": 5,
+    "p_tabular": 0.0554,
+    "p_graph": 0.0256,
+    "p_final": 0.0404,
+    "dominant_action": "ALLOW",
+    "action_breakdown": {
+      "ALLOW": 5,
+      "STEP_UP": 0,
+      "REVIEW": 0
+    }
+  },
+  {
+    "level": "Level 5: Dense Hardware Ring (10 Acc/Dev)",
+    "k_accounts": 10,
+    "p_tabular": 0.0554,
+    "p_graph": 0.0163,
+    "p_final": 0.0535,
+    "dominant_action": "ALLOW",
+    "action_breakdown": {
+      "ALLOW": 10,
+      "STEP_UP": 0,
+      "REVIEW": 0
+    }
+  }
+]

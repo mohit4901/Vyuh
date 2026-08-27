@@ -1,0 +1,28 @@
+{
+  "scenario_parameters": {
+    "monthly_gmv_inr": 1000000000,
+    "avg_ticket_inr": 500.0,
+    "monthly_txns": 2000000,
+    "gross_fraud_rate_pct": 1.5,
+    "gross_fraud_loss_at_risk_inr": 15000000.0,
+    "fixed_operating_fpr_pct": 1.0
+  },
+  "comparative_economics": {
+    "tabular_baseline": {
+      "recall_pct": 7.6,
+      "monthly_fraud_caught_inr": 1140000.0,
+      "annual_fraud_caught_inr": 13680000.0
+    },
+    "vyuh_joint_model": {
+      "recall_pct": 11.49,
+      "monthly_fraud_caught_inr": 1723500.0,
+      "annual_fraud_caught_inr": 20682000.0
+    },
+    "incremental_merchant_lift": {
+      "monthly_net_savings_inr": 583500.0,
+      "annual_net_savings_inr": 7002000.0,
+      "relative_fraud_capture_gain_pct": 51.2
+    }
+  },
+  "disclaimer": "Scenario analysis based on real IEEE-CIS holdout operating points applied to a representative merchant volume model."
+}

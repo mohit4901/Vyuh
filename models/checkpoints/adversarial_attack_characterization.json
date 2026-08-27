@@ -1,0 +1,56 @@
+[
+  {
+    "regime": "1. Baseline Legitimate User",
+    "evasion_technique": "Standard single-user checkout (1:1 binding)",
+    "p_tabular": 0.0384,
+    "p_graph": 0.1551,
+    "p_joint": 0.109,
+    "gateway_action": "STEP_UP_AUTH",
+    "detection_verdict": "\u2705 PASSED (Low / Non-blocking Friction)"
+  },
+  {
+    "regime": "2. Legitimate Office / Coworking Sharing",
+    "evasion_technique": "Human-spaced sharing across 8 hours (8h, 5h, 2h intervals)",
+    "p_tabular": 0.0384,
+    "p_graph": 0.4016,
+    "p_joint": 0.1643,
+    "gateway_action": "STEP_UP_AUTH",
+    "detection_verdict": "\u2705 PASSED (Low / Non-blocking Friction)"
+  },
+  {
+    "regime": "3. Coordinated Bot Syndicate Attack",
+    "evasion_technique": "High-velocity hardware replay (10 checkouts in 30 seconds)",
+    "p_tabular": 0.0384,
+    "p_graph": 0.3333,
+    "p_joint": 0.1618,
+    "gateway_action": "STEP_UP_AUTH",
+    "detection_verdict": "\u2705 CAUGHT (Relational Escalation)"
+  },
+  {
+    "regime": "4. Low-and-Slow Attack (Temporal Evasion)",
+    "evasion_technique": "Syndicate spaces attacks across multiple days to evade 1-hour rolling velocity windows",
+    "p_tabular": 0.0384,
+    "p_graph": 0.4423,
+    "p_joint": 0.1662,
+    "gateway_action": "STEP_UP_AUTH",
+    "detection_verdict": "\u26a0\ufe0f PARTIAL DETECTION (24h Degree Active, 1h Velocity Missed)"
+  },
+  {
+    "regime": "5. Fully Distributed Attack (Zero Reuse)",
+    "evasion_technique": "Disposable proxy hardware + disposable virtual cards (Degree = 1, Velocity = 1)",
+    "p_tabular": 0.0384,
+    "p_graph": 0.1551,
+    "p_joint": 0.109,
+    "gateway_action": "STEP_UP_AUTH",
+    "detection_verdict": "\u26a0\ufe0f MISSED (Known Relational Blindspot: Zero Reuse)"
+  },
+  {
+    "regime": "6. Rapid Carding Attack (Card Cycling)",
+    "evasion_technique": "Testing 8 stolen cards on single emulator in 45 seconds",
+    "p_tabular": 0.0384,
+    "p_graph": 0.3337,
+    "p_joint": 0.1633,
+    "gateway_action": "STEP_UP_AUTH",
+    "detection_verdict": "\u2705 CAUGHT (Relational Escalation)"
+  }
+]

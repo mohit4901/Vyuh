@@ -1,0 +1,42 @@
+{
+  "m1_tabular": {
+    "name": "1. Tabular LightGBM (10 Feats)",
+    "pr_auc": 0.11528109092905661,
+    "roc_auc": 0.7362060347632782,
+    "brier": 0.03192920003366863,
+    "recall": 0.0031988188976377952,
+    "precision": 0.325,
+    "fpr": 0.0002367507277892743,
+    "net_saved": -8265.878
+  },
+  "m2_graph": {
+    "name": "2. Relational Graph GBDT (4 Feats)",
+    "pr_auc": 0.12629320643888858,
+    "roc_auc": 0.7127978556660132,
+    "brier": 0.03198684261936107,
+    "recall": 0.021653543307086614,
+    "precision": 0.5,
+    "fpr": 0.0007716320016835607,
+    "net_saved": -25462.702
+  },
+  "m3_fusion": {
+    "name": "3. Multi-Modal Learned Fusion",
+    "pr_auc": 0.13760151594035136,
+    "roc_auc": 0.7404915470099673,
+    "brier": 0.03180183739322017,
+    "recall": 0.029281496062992126,
+    "precision": 0.3851132686084142,
+    "fpr": 0.001666023639998597,
+    "net_saved": -54033.71
+  },
+  "m4_cost_calibrated": {
+    "name": "4. VYUH Full (Cost-Calibrated Gate)",
+    "pr_auc": 0.13760151594035136,
+    "roc_auc": 0.7404915470099673,
+    "brier": 0.03180183739322017,
+    "recall": 0.020915354330708662,
+    "precision": 0.46195652173913043,
+    "fpr": 0.0008680860018940058,
+    "net_saved": -24772.549
+  }
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "regime": "Regime 1: Individual Benign (Isolated 1:1)",
+    "k_accounts": 1,
+    "mean_p_tabular": 0.0538,
+    "std_p_tabular": 0.0143,
+    "mean_p_graph": 0.1562,
+    "std_p_graph": 0.002,
+    "mean_p_final": 0.28,
+    "std_p_final": 0.0898,
+    "escalation_rate_pct": 58.0
+  },
+  {
+    "regime": "Regime 2: Individual Fraud (Tabular Anomaly)",
+    "k_accounts": 1,
+    "mean_p_tabular": 0.0262,
+    "std_p_tabular": 0.0,
+    "mean_p_graph": 0.1164,
+    "std_p_graph": 0.0019,
+    "mean_p_final": 0.127,
+    "std_p_final": 0.0017,
+    "escalation_rate_pct": 0.0
+  },
+  {
+    "regime": "Regime 3: 2-Account Coordination (Low)",
+    "k_accounts": 2,
+    "mean_p_tabular": 0.0544,
+    "std_p_tabular": 0.017,
+    "mean_p_graph": 0.2075,
+    "std_p_graph": 0.0116,
+    "mean_p_final": 0.3408,
+    "std_p_final": 0.1418,
+    "escalation_rate_pct": 66.0
+  },
+  {
+    "regime": "Regime 4: 3-Account Coordination (Moderate)",
+    "k_accounts": 3,
+    "mean_p_tabular": 0.0542,
+    "std_p_tabular": 0.0173,
+    "mean_p_graph": 0.3883,
+    "std_p_graph": 0.0,
+    "mean_p_final": 0.6516,
+    "std_p_final": 0.0826,
+    "escalation_rate_pct": 100.0
+  },
+  {
+    "regime": "Regime 5: 5-Account Syndicate (High)",
+    "k_accounts": 5,
+    "mean_p_tabular": 0.0536,
+    "std_p_tabular": 0.0133,
+    "mean_p_graph": 0.4532,
+    "std_p_graph": 0.0367,
+    "mean_p_final": 0.6432,
+    "std_p_final": 0.0487,
+    "escalation_rate_pct": 100.0
+  },
+  {
+    "regime": "Regime 6: 10-Account Hardware Ring (Dense)",
+    "k_accounts": 10,
+    "mean_p_tabular": 0.0515,
+    "std_p_tabular": 0.0152,
+    "mean_p_graph": 0.3354,
+    "std_p_graph": 0.0093,
+    "mean_p_final": 0.5768,
+    "std_p_final": 0.0912,
+    "escalation_rate_pct": 100.0
+  }
+]

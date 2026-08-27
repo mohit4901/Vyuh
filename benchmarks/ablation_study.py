@@ -283,15 +283,19 @@ def run_full_ablation():
     y_pred_calibrated = calibrated_model.predict_proba(X_test_m3)[:, 1]
     latency_ms = float((time.time() - t0) / len(X_test_m3) * 1000)
 
-    # Optimal cost-calibrated threshold: sweep across thresholds to maximize Net ₹ Saved
-    best_cost_th = 0.5
-    max_net_saved = -1e9
-    for th in np.arange(0.2, 0.85, 0.02):
-        m = compute_metrics(y_test, y_pred_calibrated, amounts_test, threshold=th, model_name="M4_sweep")
-        if m["net_saved_inr"] > max_net_saved:
-            max_net_saved = m["net_saved_inr"]
-            best_cost_th = th
+    # Optimal cost-calibrated threshold: strictly selected on VALIDATION set (Zero Leakage)
+    val_pred_calibrated = calibrated_model.predict_proba(X_val_m4)[:, 1]
+    amounts_val = train_df.iloc[val_split_idx:]["TransactionAmt"].values if "TransactionAmt" in train_df.columns else np.ones(len(y_val_m4)) * 1850
 
+    best_cost_th = 0.5
+    max_val_saved = -1e9
+    for th in np.arange(0.2, 0.90, 0.02):
+        m_val = compute_metrics(y_val_m4, val_pred_calibrated, amounts_val, threshold=th, model_name="M4_val_sweep")
+        if m_val["net_saved_inr"] > max_val_saved:
+            max_val_saved = m_val["net_saved_inr"]
+            best_cost_th = float(th)
+
+    print(f"   🎯 Frozen Validation Cost Threshold: {best_cost_th:.2f} (Evaluated on Unseen Held-out Test Set)")
     m4_metrics = compute_metrics(y_test, y_pred_calibrated, amounts_test, threshold=best_cost_th, model_name="M4")
 
     res_m4 = {

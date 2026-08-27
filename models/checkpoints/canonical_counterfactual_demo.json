@@ -1,0 +1,52 @@
+{
+  "raw_transaction_payload": {
+    "orderId": "ORD_CANONICAL_7781",
+    "amount": 499.0,
+    "cardId": "CARD_CANONICAL_A",
+    "deviceId": "DEV_CANONICAL_TARGET_X",
+    "email": "sarah.finance@enterprise.com"
+  },
+  "evaluation_timestamp": "14:00 (2:00 PM)",
+  "contexts": [
+    {
+      "context_name": "Context A: Isolated Personal Device (1:1)",
+      "description": "Dedicated personal hardware signature with no prior multi-account sharing.",
+      "p_tabular": 0.0384,
+      "p_graph": 0.1551,
+      "p_final": 0.109,
+      "action": "STEP_UP_AUTH",
+      "action_level": "MEDIUM",
+      "policy_explanation": "Moderate relational risk detected (10.9% vs 3.5% base). Triggering non-destructive biometric/2FA step-up verification."
+    },
+    {
+      "context_name": "Context B: Legitimate Spaced Sharing (Office Coworkers)",
+      "description": "4 distinct employees checking out across 8 hours on shared corporate NAT.",
+      "p_tabular": 0.0384,
+      "p_graph": 0.4016,
+      "p_final": 0.1643,
+      "action": "STEP_UP_AUTH",
+      "action_level": "MEDIUM",
+      "policy_explanation": "Moderate relational risk detected (16.4% vs 3.5% base). Triggering non-destructive biometric/2FA step-up verification."
+    },
+    {
+      "context_name": "Context C: Coordinated Bot Burst (Carding Syndicate Attack)",
+      "description": "10 synthetic accounts executing identical \u20b9499 checkouts within 30 seconds on same hardware.",
+      "p_tabular": 0.0384,
+      "p_graph": 0.3333,
+      "p_final": 0.1618,
+      "action": "STEP_UP_AUTH",
+      "action_level": "MEDIUM",
+      "policy_explanation": "Moderate relational risk detected (16.2% vs 3.5% base). Triggering non-destructive biometric/2FA step-up verification."
+    }
+  ],
+  "counterfactual_verification": {
+    "p_tabular_invariant": true,
+    "p_tabular_value": 0.0384,
+    "p_final_progression": [
+      0.109,
+      0.1643,
+      0.1618
+    ],
+    "conclusion": "The transaction payload is bitwise identical (P_tabular = 0.0384). The risk escalation is driven strictly by the surrounding temporal relational context."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "benchmark_environment": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "processor": "arm",
+    "python_version": "3.9.6",
+    "n_warmup_requests": 50,
+    "n_measured_requests": 500,
+    "containerized": false,
+    "scope": "Local in-memory microservice execution (excludes network hop)"
+  },
+  "latencies_ms": {
+    "p50_total_e2e": 7.46,
+    "p95_total_e2e": 8.38,
+    "p99_total_e2e": 13.55,
+    "p50_graph_ingestion": 0.514
+  }
+}

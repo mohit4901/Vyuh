@@ -1,0 +1,56 @@
+[
+  {
+    "scenario": "1. Normal Single User (1 Acc/Dev, Isolated)",
+    "entities": 1,
+    "p50_risk": 0.1689,
+    "p95_risk": 0.5243,
+    "stepup_rate_pct": 8.0,
+    "review_rate_pct": 0.0,
+    "clean_conversion_pct": 92.0
+  },
+  {
+    "scenario": "2. Family Shared Device (2 Accs/Dev, 4h Spaced)",
+    "entities": 2,
+    "p50_risk": 0.1999,
+    "p95_risk": 0.6584,
+    "stepup_rate_pct": 2.0,
+    "review_rate_pct": 8.0,
+    "clean_conversion_pct": 90.0
+  },
+  {
+    "scenario": "3. Office / Coworking NAT (4 Accs/Dev, 8h Spaced)",
+    "entities": 4,
+    "p50_risk": 0.4094,
+    "p95_risk": 0.6631,
+    "stepup_rate_pct": 52.0,
+    "review_rate_pct": 28.0,
+    "clean_conversion_pct": 20.0
+  },
+  {
+    "scenario": "4. Public Retail Kiosk (8 Cards, 12h Spaced)",
+    "entities": 8,
+    "p50_risk": 0.3971,
+    "p95_risk": 0.6631,
+    "stepup_rate_pct": 57.0,
+    "review_rate_pct": 30.0,
+    "clean_conversion_pct": 13.0
+  },
+  {
+    "scenario": "5. Bot Syndicate (5 Accs, 30s Rapid Burst)",
+    "entities": 5,
+    "p50_risk": 0.6319,
+    "p95_risk": 0.6319,
+    "stepup_rate_pct": 0.0,
+    "review_rate_pct": 100.0,
+    "clean_conversion_pct": 0.0
+  },
+  {
+    "scenario": "6. Dense Carding Ring (10 Accs, 45s Rapid Burst)",
+    "entities": 10,
+    "p50_risk": 0.5528,
+    "p95_risk": 0.5528,
+    "stepup_rate_pct": 100.0,
+    "review_rate_pct": 0.0,
+    "clean_conversion_pct": 0.0
+  }
+]

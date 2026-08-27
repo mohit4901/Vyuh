@@ -22,12 +22,12 @@ export default function Header({ activeTab, setActiveTab }) {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-lg font-bold tracking-tight text-white font-sans flex items-center gap-1.5">
-                VYUH <span className="text-cyan-400 font-mono font-medium text-sm">(व्यूह) 2.0</span>
+                VYUH <span className="text-cyan-400 font-mono font-medium text-sm">(व्यूह) 2.1</span>
               </h1>
               <span className="badge badge-cyan text-[10px] py-0.5">Track 02: AI Risk Manager</span>
             </div>
             <p className="text-xs text-slate-400 font-mono">
-              Fraud Network Investigation & Decision Intelligence Layer
+              Temporal Relational Fraud Intelligence Gateway
             </p>
           </div>
         </div>
@@ -36,7 +36,7 @@ export default function Header({ activeTab, setActiveTab }) {
         <div className="hidden lg:flex items-center gap-3 text-xs font-mono">
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
             <span className="pulse-dot bg-emerald-400"></span>
-            Inference: Live Python Bridge (&lt;15ms)
+            Inference: P50 = 7.46ms (Single-Core CPU)
           </div>
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
             100% Defense-Only

@@ -1,0 +1,36 @@
+# VYUH 2.0 — Production Multi-Service Container Setup
+version: '3.8'
+
+services:
+  inference-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python backend/inference_service.py
+    ports:
+      - "5001:5001"
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5001/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  gateway-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: node backend/server.js
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - PYTHON_SERVICE_HOST=inference-engine
+      - PYTHON_SERVICE_PORT=5001
+    depends_on:
+      inference-engine:
+        condition: service_healthy
+    restart: unless-stopped

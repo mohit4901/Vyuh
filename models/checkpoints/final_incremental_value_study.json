@@ -1,0 +1,61 @@
+{
+  "evaluation_summary": {
+    "dataset": "IEEE-CIS Fraud Detection (Untouched Temporal Holdout)",
+    "test_sample_count": 118108,
+    "test_fraud_count": 4064,
+    "test_fraud_rate": 0.034409184813899145,
+    "bootstrap_resamples": 300,
+    "verification_status": "PASS \u2014 Statistically Significant Positive Incremental Value"
+  },
+  "model_comparisons": [
+    {
+      "model_name": "M1: Tabular LightGBM (10 Feats)",
+      "model_key": "m1_tabular",
+      "pr_auc": 0.1124,
+      "roc_auc": 0.7309,
+      "recall_at_1pct_fpr": 7.6,
+      "recall_at_05pct_fpr": 3.94,
+      "fpr_at_20pct_recall": 3.35
+    },
+    {
+      "model_name": "M2: Relational Graph GBDT (13 Feats)",
+      "model_key": "m2_graph",
+      "pr_auc": 0.1251,
+      "roc_auc": 0.7137,
+      "recall_at_1pct_fpr": 9.6,
+      "recall_at_05pct_fpr": 6.87,
+      "fpr_at_20pct_recall": 3.95
+    },
+    {
+      "model_name": "M3: Joint Concat GBDT (23 Feats)",
+      "model_key": "m3_concat",
+      "pr_auc": 0.1456,
+      "roc_auc": 0.7359,
+      "recall_at_1pct_fpr": 11.49,
+      "recall_at_05pct_fpr": 7.31,
+      "fpr_at_20pct_recall": 2.48
+    },
+    {
+      "model_name": "M4: Calibrated Joint GBDT (23 Feats + Isotonic)",
+      "model_key": "m4_calibrated",
+      "pr_auc": 0.1402,
+      "roc_auc": 0.7355,
+      "recall_at_1pct_fpr": 10.75,
+      "recall_at_05pct_fpr": 7.6,
+      "fpr_at_20pct_recall": 2.91
+    }
+  ],
+  "bootstrap_significance": {
+    "delta_pr_auc_mean": 0.0333,
+    "delta_pr_auc_95_ci": [
+      0.0247,
+      0.0418
+    ],
+    "delta_roc_auc_mean": 0.0048,
+    "delta_roc_auc_95_ci": [
+      -0.0001,
+      0.0095
+    ],
+    "strictly_positive": true
+  }
+}
