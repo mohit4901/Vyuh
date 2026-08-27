@@ -21,6 +21,15 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from backend.inference_service import ModelManager, MANAGER
 
+# Cross-platform ANSI Color Support (macOS, Linux, Windows 10/11)
+if sys.platform == "win32":
+    try:
+        import ctypes
+        kernel32 = ctypes.windll.kernel32
+        kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
+    except Exception:
+        pass
+
 # ANSI Color Codes for Rich Terminal Display
 C_RESET   = "\033[0m"
 C_BOLD    = "\033[1m"

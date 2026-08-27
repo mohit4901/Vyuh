@@ -22,11 +22,29 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Static files for frontend dashboard (will serve Vite build dist or static)
-const distPath = path.join(__dirname, '..', 'frontend', 'dist');
-const frontendPath = path.join(__dirname, '..', 'frontend');
-app.use(express.static(distPath));
-app.use(express.static(frontendPath));
+// Root API Index & Discovery
+app.get('/', (req, res) => {
+  res.json({
+    system: 'VYUH AI Risk Manager & Forensic Gateway',
+    tagline: 'Temporal Relational Fraud Intelligence Gateway',
+    track: 'Razorpay AI Buildathon 2026 · Track 02: AI Risk Manager',
+    status: 'online',
+    mode: 'Strictly Defense-Only',
+    cli: 'Run ./vyuh (macOS/Linux) or vyuh.bat (Windows) for interactive terminal dashboard',
+    endpoints: {
+      health: 'GET /api/health',
+      stats: 'GET /api/stats',
+      score: 'POST /api/score',
+      benchmarks: 'GET /api/benchmarks',
+      costDial: 'GET /api/cost-dial?threshold=0.65&aov=1850&friction=350',
+      riskBudget: 'GET /api/risk-budget?profile=high_ticket_electronics',
+      graphSample: 'GET /api/graph/sample',
+      auditTrail: 'GET /api/audit-trail',
+      investigate: 'POST /api/investigate'
+    },
+    documentation: 'See README.md and docs/ for complete architecture and evaluation'
+  });
+});
 
 // --- REST API ENDPOINTS ---
 
@@ -205,20 +223,21 @@ app.get('/api/benchmarks', (req, res) => {
   });
 });
 
-// Fallback to frontend index.html
+// 404 Fallback
 app.use((req, res) => {
-  if (require('fs').existsSync(path.join(distPath, 'index.html'))) {
-    res.sendFile(path.join(distPath, 'index.html'));
-  } else {
-    res.sendFile(path.join(frontendPath, 'index.html'));
-  }
+  res.status(404).json({
+    error: 'NOT_FOUND',
+    message: `Endpoint ${req.method} ${req.url} does not exist on VYUH REST Gateway.`,
+    availableEndpoints: 'GET / to list all active endpoints'
+  });
 });
 
 // Start Server
 app.listen(PORT, () => {
   console.log('====================================================');
-  console.log(`🛡️  VYUH AI Risk Manager REST API Live on Port ${PORT}`);
-  console.log(`🌐 Dashboard: http://localhost:${PORT}`);
+  console.log(`🛡️  VYUH AI Risk Manager REST API Gateway Live on Port ${PORT}`);
+  console.log(`🌐 API Index: http://localhost:${PORT}`);
   console.log(`📊 Health Endpoint: http://localhost:${PORT}/api/health`);
+  console.log(`⚡ Interactive CLI: ./vyuh (macOS/Linux) or vyuh.bat (Windows)`);
   console.log('====================================================');
 });

@@ -16,12 +16,10 @@ WORKDIR /app
 # Copy dependency files
 COPY requirements.txt ./
 COPY backend/package.json ./backend/
-COPY frontend/package.json ./frontend/
 
 # Install python & node dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 RUN cd backend && npm install --production
-RUN cd frontend && npm install && npm run build
 
 # Copy codebase
 COPY . .

@@ -497,6 +497,9 @@ Vyuh/
 │   ├── test_failure_injection.py      # Microservice failure recovery kill test
 │   ├── test_http_end_to_end.py        # End-to-end HTTP integration test
 │   ├── test_online_offline_parity.py  # 100-sample mathematical parity test
+│   ├── test_failure_injection.py      # Malformed inputs & fail-safe fallback verification
+│   ├── test_http_end_to_end.py        # Dual-runtime HTTP REST integration test
+│   ├── test_online_offline_parity.py  # 100-sample live engine vs offline model parity test
 │   └── test_stream_evolution.py       # Live stream progression & cold-start test
 │
 ├── docs/
@@ -511,6 +514,9 @@ Vyuh/
 │   ├── processed/                     # Train/test temporal split pickle files
 │   └── raw/                           # Raw CSV files directory
 │
+├── vyuh                               # macOS/Linux Terminal Launcher (Executable)
+├── vyuh.bat                           # Windows Terminal Launcher (Batch script)
+├── vyuh_cli.py                        # Interactive Terminal AI Engine & Model Inspector
 ├── Dockerfile                         # Multi-runtime container (Node 18 + Python 3.9)
 ├── docker-compose.yml                 # Multi-service container orchestration
 ├── requirements.txt                   # Python package manifest
@@ -523,49 +529,62 @@ Vyuh/
 
 ## 17. Technology Stack
 
-| Layer | Technology | Version | Purpose in VYUH |
+| Layer | Technology | Platform Compatibility | Purpose in VYUH |
 | :--- | :--- | :---: | :--- |
-| **ML Engine** | `LightGBM` | $\ge 4.0.0$ | Fast GBDT training & sub-5ms CPU inference. |
-| **Scientific Stack** | `scikit-learn`, `numpy`, `pandas` | Standard | Isotonic calibration, bootstrap validation, feature arrays. |
-| **Graph Processing** | `NetworkX` | $\ge 3.1$ | In-memory bipartite multigraph & 2-hop topological extraction. |
-| **API Gateway** | `Express.js` (Node.js) | `^5.2.1` | Asynchronous REST gateway & static asset server. |
-| **Dashboard UI** | `React` + `Vite` | `React 19` / `Vite 8` | Interactive forensic dashboard & counterfactual demo. |
-| **Graph Visualization**| `Cytoscape.js` | `^3.30.4` | Interactive entity-graph topology rendering in UI. |
-| **Containerization** | `Docker` / `Docker Compose` | Multi-stage | Reproducible dual-service orchestration. |
+| **Interactive Terminal Engine** | `Python CLI` (`./vyuh` / `vyuh.bat`) | macOS, Linux, Windows | Real-time terminal dashboard, model hash audit, and live scoring. |
+| **ML Inference Engine** | `LightGBM` ($\ge 4.0.0$) | macOS, Linux, Windows | Fast GBDT training & sub-5ms single-core CPU inference. |
+| **Scientific & Math Stack** | `scikit-learn`, `numpy`, `pandas` | macOS, Linux, Windows | Isotonic calibration, bootstrap validation, feature arrays. |
+| **Graph Intelligence Engine**| `NetworkX` ($\ge 3.1$) | macOS, Linux, Windows | In-memory bipartite multigraph & 2-hop topological extraction. |
+| **High-Throughput API Gateway**| `Express.js` (Node.js $\ge 18$) | macOS, Linux, Windows | Asynchronous payment REST gateway & defense decision routing. |
+| **Containerization** | `Docker` / `Docker Compose` | Multi-platform | Reproducible dual-service orchestration. |
 
 ---
 
-## 18. Prerequisites & Installation
+## 18. Prerequisites & Installation (macOS, Linux & Windows)
 
 ### System Requirements:
 * **Python**: `3.9` or higher
 * **Node.js**: `18.x` or higher
-* **npm**: `9.x` or higher
-* **RAM**: 4 GB minimum (8 GB recommended)
-* **CPU**: Dual-core x86_64 or ARM64 (Apple Silicon natively supported)
+* **RAM**: 4 GB minimum
+* **OS**: macOS (Intel / Apple Silicon M1-M4), Linux (Ubuntu/Debian/RHEL), or Windows 10/11 (CMD / PowerShell / WSL)
 
-### Step 1: Clone Repository
+---
+
+### macOS & Linux Installation:
+
 ```bash
+# 1. Clone the repository
 git clone https://github.com/mohit4901/Vyuh.git
 cd Vyuh
-```
 
-### Step 2: Python Environment Setup
-```bash
+# 2. Set up Python virtual environment & install dependencies
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
+
+# 3. Install backend REST API dependencies
+cd backend && npm install && cd ..
 ```
 
-### Step 3: Node.js Dependencies Setup
-```bash
-# Install backend dependencies
-cd backend && npm install
-cd ..
+---
 
-# Install frontend dependencies and build static assets
-cd frontend && npm install && npm run build
+### Windows (Command Prompt / PowerShell) Installation:
+
+```cmd
+:: 1. Clone the repository
+git clone https://github.com/mohit4901/Vyuh.git
+cd Vyuh
+
+:: 2. Set up Python virtual environment & install dependencies
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+:: 3. Install backend REST API dependencies
+cd backend
+npm install
 cd ..
 ```
 
@@ -573,32 +592,58 @@ cd ..
 
 ## 19. Running Locally
 
-Running VYUH locally requires two lightweight processes:
+### Mode A: Interactive Terminal Dashboard (Instant CLI)
 
-### Terminal 1: Start Python Live Inference Microservice
-```bash
-source .venv/bin/activate
-python backend/inference_service.py
-```
-*Expected Output:*
-```
-🧠 Initializing VYUH In-Memory Inference & Dynamic Graph Engine...
-   ✅ Loaded Tabular LightGBM (10-Feature)
-   ✅ Loaded Relational Graph GBDT (4-Feature)
-   ✅ Loaded Calibrated 23-Feature Joint Model
-   ✅ Loaded Joint 23-Feature GBDT Model
-🚀 Python Live Inference Microservice running on http://127.0.0.1:5001
-```
+Run the unified terminal engine to inspect checkpoints, evaluate transactions, and run live simulations:
 
-### Terminal 2: Start Express REST Gateway & Static Server
+* **macOS / Linux**:
+  ```bash
+  ./vyuh
+  # or: python vyuh_cli.py
+  ```
+* **Windows (CMD / PowerShell)**:
+  ```cmd
+  vyuh.bat
+  :: or: python vyuh_cli.py
+  ```
+
+#### CLI Shortcut Flags:
+* `./vyuh --demo` — Runs canonical counterfactual demonstration (Context A, B, and C).
+* `./vyuh --stream` — Runs live 5-transaction syndicate burst escalation simulation.
+* `./vyuh --benchmarks` — Displays 118K holdout PR-AUC metrics and 300 bootstrap iterations.
+
+---
+
+### Mode B: Dual-Service HTTP REST Gateway (Production Mode)
+
+To run the live HTTP REST API stack locally:
+
+#### Terminal 1: Start Python AI & Dynamic Graph Microservice (Port 5001)
+* **macOS / Linux**:
+  ```bash
+  source .venv/bin/activate
+  python backend/inference_service.py
+  ```
+* **Windows**:
+  ```cmd
+  .venv\Scripts\activate
+  python backend/inference_service.py
+  ```
+
+#### Terminal 2: Start Express Payment REST Gateway (Port 3000)
 ```bash
 node backend/server.js
 ```
-*Expected Output:*
-```
-🛡️  VYUH AI Risk Manager REST API Live on Port 3000
-🌐 Dashboard: http://localhost:3000
-📊 Health Endpoint: http://localhost:3000/api/health
+
+#### Test Live API Endpoints:
+```bash
+# Health Check
+curl http://localhost:3000/api/health
+
+# Live Transaction Scoring
+curl -X POST http://localhost:3000/api/score \
+  -H "Content-Type: application/json" \
+  -d '{"orderId":"ORD-01","amount":499.0,"cardId":"CARD_A","deviceId":"DEV_X","email":"user@test.com"}'
 ```
 
 Open your browser at **`http://localhost:3000`** to access the dashboard.
