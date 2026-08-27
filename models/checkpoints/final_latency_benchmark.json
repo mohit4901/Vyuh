@@ -9,9 +9,9 @@
     "scope": "Local in-memory microservice execution (excludes network hop)"
   },
   "latencies_ms": {
-    "p50_total_e2e": 10.51,
-    "p95_total_e2e": 11.04,
-    "p99_total_e2e": 11.74,
-    "p50_graph_ingestion": 0.496
+    "p50_total_e2e": 7.46,
+    "p95_total_e2e": 8.38,
+    "p99_total_e2e": 13.55,
+    "p50_graph_ingestion": 0.514
   }
 }

@@ -10,8 +10,9 @@ import shutil
 import zipfile
 from pathlib import Path
 
-# Set KGAT token before any kaggle imports
-os.environ["KAGGLE_API_TOKEN"] = "KGAT_206c7f9cf69143743f169dad80e8d56a"
+# Optional Kaggle Token from environment
+if "KAGGLE_API_TOKEN" not in os.environ and "KAGGLE_KEY" not in os.environ:
+    pass
 
 import kagglehub
 
