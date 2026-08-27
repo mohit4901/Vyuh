@@ -14,9 +14,9 @@
       "p_tabular": 0.0384,
       "p_graph": 0.1551,
       "p_final": 0.109,
-      "action": "STEP_UP_AUTH",
-      "action_level": "MEDIUM",
-      "policy_explanation": "Moderate relational risk detected (10.9% vs 3.5% base). Triggering non-destructive biometric/2FA step-up verification."
+      "action": "ALLOW",
+      "action_level": "LOW",
+      "policy_explanation": "Clean transaction profile verified and committed to immutable audit trail."
     },
     {
       "context_name": "Context B: Legitimate Spaced Sharing (Office Coworkers)",
@@ -26,7 +26,7 @@
       "p_final": 0.1643,
       "action": "STEP_UP_AUTH",
       "action_level": "MEDIUM",
-      "policy_explanation": "Moderate relational risk detected (16.4% vs 3.5% base). Triggering non-destructive biometric/2FA step-up verification."
+      "policy_explanation": "Moderate relational risk detected (16.4% vs 3.8% base). Triggering non-destructive biometric/2FA step-up verification."
     },
     {
       "context_name": "Context C: Coordinated Bot Burst (Carding Syndicate Attack)",
@@ -36,7 +36,7 @@
       "p_final": 0.1618,
       "action": "STEP_UP_AUTH",
       "action_level": "MEDIUM",
-      "policy_explanation": "Moderate relational risk detected (16.2% vs 3.5% base). Triggering non-destructive biometric/2FA step-up verification."
+      "policy_explanation": "Moderate relational risk detected (16.2% vs 3.8% base). Triggering non-destructive biometric/2FA step-up verification."
     }
   ],
   "counterfactual_verification": {

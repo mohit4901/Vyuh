@@ -53,3 +53,19 @@ To verify that the incremental value of relational features is not an artifact o
 ```
 
 > **Signature Conclusion**: *"The transaction didn't change. The context did."*
+
+---
+
+## 4. Negative Ablation & Historical Baseline Summary
+
+```
+┌──────────────────────────────────────────────┬──────────┬──────────┬─────────────┬──────────────────────────────────────────────────┐
+│ Architecture / Experiment                    │ PR-AUC   │ ROC-AUC  │ Latency P50 │ Classification & Decision Finding                │
+├──────────────────────────────────────────────┼──────────┼──────────┼─────────────┼──────────────────────────────────────────────────┤
+│ Stage-1 High-Capacity Tabular (481 Feats)    │ 0.4608   │ 0.8610   │ >120 ms     │ Offline Research Baseline (Latency Unacceptable) │
+│ 55M Parameter Sequence Transformer           │ 0.0892   │ 0.6720   │ ~85 ms      │ Negative Ablation (Feature Discretization Loss)  │
+│ 2-Stage Hierarchical Probability Fusion      │ 0.1251   │ 0.7137   │ 12.4 ms     │ Negative Ablation (1D Information Bottleneck)    │
+│ M3: 23-Feature Joint GBDT (Canonical Winner) │ 0.1456   │ 0.7359   │ 7.46 ms     │ Canonical Winner (Preserves Feature Interactions)│
+└──────────────────────────────────────────────┴──────────┴──────────┴─────────────┴──────────────────────────────────────────────────┘
+```
+

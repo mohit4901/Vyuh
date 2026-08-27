@@ -38,6 +38,23 @@ Crucially, infrastructure sharing is often benign:
 
 ## 2. 15-Second Architecture
 
+```mermaid
+flowchart TD
+    Txn[Incoming Payment Transaction] --> TabFeat[10 Tabular Features]
+    Txn --> GraphFeat[Live Entity Multigraph]
+    GraphFeat --> RelFeat[13 Backward-Looking Relational Features]
+    
+    TabFeat --> JointGBDT[23-Feature Joint GBDT Model M3]
+    RelFeat --> JointGBDT
+    
+    JointGBDT --> Calib[Isotonic Probability Calibration M4]
+    Calib --> CostGateway[Asymmetric Economic Cost Gateway]
+    
+    CostGateway -->|Risk < 0.15| Allow[ALLOW: 1-Click Clean Checkout]
+    CostGateway -->|0.15 <= Risk < 0.25| StepUp[STEP-UP: 2FA / Biometric Challenge]
+    CostGateway -->|Risk >= 0.25| Review[FLAG REVIEW: Forensic Analyst Brief]
+```
+
 ```
                  INCOMING PAYMENT TRANSACTION
                               │

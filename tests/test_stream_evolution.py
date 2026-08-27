@@ -10,6 +10,9 @@ Demonstrates the 60-second core thesis:
 """
 
 import sys
+import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import time
 import json
 from pathlib import Path
@@ -21,7 +24,7 @@ from backend.inference_service import ModelManager
 
 def run_evolution_test():
     print("=" * 85)
-    print("🚀 VYUH 2.0 — LIVE STREAM EVOLUTION & ADVERSARIAL SYNDICATE TEST")
+    print("🚀 VYUH 2.1 — LIVE STREAM EVOLUTION & ADVERSARIAL SYNDICATE TEST")
     print("=" * 85)
 
     manager = ModelManager()

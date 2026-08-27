@@ -5,7 +5,7 @@
     "p_tabular": 0.0384,
     "p_graph": 0.1551,
     "p_joint": 0.109,
-    "gateway_action": "STEP_UP_AUTH",
+    "gateway_action": "ALLOW",
     "detection_verdict": "\u2705 PASSED (Low / Non-blocking Friction)"
   },
   {
@@ -41,7 +41,7 @@
     "p_tabular": 0.0384,
     "p_graph": 0.1551,
     "p_joint": 0.109,
-    "gateway_action": "STEP_UP_AUTH",
+    "gateway_action": "ALLOW",
     "detection_verdict": "\u26a0\ufe0f MISSED (Known Relational Blindspot: Zero Reuse)"
   },
   {

@@ -15,6 +15,8 @@ Measures real in-memory execution latency under controlled local benchmark condi
 
 import sys
 import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import json
 import time
 import platform

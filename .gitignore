@@ -35,9 +35,12 @@ models/checkpoints/*.bin
 *.swp
 *.swo
 
-# OS
+# OS & Caches
 .DS_Store
 Thumbs.db
+.matplotlib/
+dist/
+frontend/dist/
 
 # Jupyter
 .ipynb_checkpoints/

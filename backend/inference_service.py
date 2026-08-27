@@ -15,6 +15,8 @@ Architecture (100% Dynamic — Zero Magic Strings):
 """
 
 import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import sys
 import json
 import time
@@ -269,7 +271,7 @@ class LiveEntityGraph:
 
 class ModelManager:
     def __init__(self):
-        print("🧠 Initializing VYUH 2.0 In-Memory Inference & Dynamic Graph Engine...")
+        print("🧠 Initializing VYUH 2.1 In-Memory Inference & Dynamic Graph Engine...")
         self.live_graph = LiveEntityGraph()
         self.feature_store = RollingFeatureStore()
         self.online_model = None

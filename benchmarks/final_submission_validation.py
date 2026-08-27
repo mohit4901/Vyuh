@@ -17,6 +17,8 @@ Exit Codes:
 
 import sys
 import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import json
 import glob
 import hashlib

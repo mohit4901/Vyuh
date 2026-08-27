@@ -108,3 +108,20 @@ $$\mathcal{L}(\text{Action}) = \begin{cases} P_{\text{final}} \times \text{Amoun
 * **ALLOW** ($P_{\text{final}} < 0.15$): Frictionless 1-click checkout committed to immutable audit trail.
 * **STEP-UP AUTH** ($0.15 \le P_{\text{final}} < 0.25$): Non-destructive challenge (biometric/OTP) for moderate sharing.
 * **FLAG HUMAN REVIEW** ($P_{\text{final}} \ge 0.25$): High-risk escalation with automated forensic brief.
+
+---
+
+## 6. Negative Ablations & Research Evolution
+
+To maintain rigorous scientific transparency, several candidate architectures were evaluated during development:
+
+1. **55M-Parameter Sequence Transformer (`models/transformer_55m.py`)**:
+   * *Hypothesis*: Multi-head self-attention over sequential payment history could learn complex temporal dependencies.
+   * *Finding (Negative Ablation)*: Incurred prohibitive inference latency (~85ms CPU) and suffered from feature discretization loss compared to tree-based partitioning on continuous tabular features.
+2. **GRPO Policy Optimization (`models/grpo_trainer.py`)**:
+   * *Hypothesis*: Group Relative Policy Optimization could learn dynamic threshold actions directly from reward signals.
+   * *Finding (Negative Ablation)*: Required unstable multi-reward balancing; deterministic asymmetric cost-calibration on calibrated GBDT probabilities ($M4$) proved more stable, explainable, and compliant with payment gateway SLAs.
+3. **Stage-1 High-Capacity Batch Baseline (`models/stage1_lgbm.py`, 481 Features, PR-AUC 0.4608)**:
+   * *Role*: Evaluated 481 historical engineered batch features ($V1-V339, C1-C14, D1-D15$) as an offline research upper bound.
+   * *Trade-off*: Extracting 481 complex multi-table aggregations requires $>120\text{ms}$ feature store lookups, violating real-time sub-10ms checkout constraints. The 23-feature streaming pipeline ($M3$) was specifically engineered for sub-millisecond extraction ($0.514\text{ms}$) while capturing temporal coordination.
+

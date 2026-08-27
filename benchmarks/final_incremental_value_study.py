@@ -16,6 +16,8 @@ Outputs:
 
 import sys
 import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import json
 import pickle
 import numpy as np

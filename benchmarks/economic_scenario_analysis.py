@@ -9,6 +9,10 @@ into economic financial impact for a representative payment aggregation merchant
   - Fixed False Positive Rate: 1.00% (Strictly Capped Customer Friction)
 """
 
+import sys
+import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import json
 from pathlib import Path
 

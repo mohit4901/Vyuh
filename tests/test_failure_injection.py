@@ -11,6 +11,9 @@ Injects actual failures across 5 system boundaries:
 """
 
 import sys
+import os
+import tempfile
+os.environ.setdefault("MPLCONFIGDIR", tempfile.gettempdir())
 import time
 from pathlib import Path
 
@@ -21,7 +24,7 @@ from backend.inference_service import ModelManager
 
 def run_failure_tests():
     print("=" * 80)
-    print("🧪 VYUH 2.0 — FAILURE INJECTION & BOUNDED RECOVERY KILL TEST")
+    print("🧪 VYUH 2.1 — FAILURE INJECTION & BOUNDED RECOVERY KILL TEST")
     print("=" * 80)
 
     manager = ModelManager()
