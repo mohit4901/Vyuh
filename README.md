@@ -494,8 +494,7 @@ Vyuh/
 ├── docs/
 │   ├── ADVERSARIAL_LIMITATIONS.md     # Detailed threat models & boundary disclosures
 │   ├── ARCHITECTURE.md                # System design & mathematical specifications
-│   ├── EVALUATION.md                  # Comprehensive empirical evaluation report
-│   └── PITCH_SCRIPT.md                # 5-minute hackathon pitch script
+│   └── EVALUATION.md                  # Comprehensive empirical evaluation report
 │
 ├── data/
 │   ├── README.md                      # Data documentation & download guide
