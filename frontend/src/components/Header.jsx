@@ -12,19 +12,19 @@ export default function Header({ activeTab, setActiveTab }) {
   ];
 
   return (
-    <header className="border-b border-[#1e293b] bg-[#090d14]/90 backdrop-blur-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 border-b" style={{ background: 'rgba(9, 13, 20, 0.92)', borderColor: '#1e293b', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Brand & Badge */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/30 border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-500/10">
+          <div className="flex items-center justify-center rounded-lg border border-cyan-500/40" style={{ width: '42px', height: '42px', background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(59, 130, 246, 0.35) 100%)', boxShadow: '0 0 20px rgba(56, 189, 248, 0.2)' }}>
             <Shield className="w-5 h-5 text-cyan-400" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-lg font-bold tracking-tight text-white font-sans flex items-center gap-1.5">
-                VYUH <span className="text-cyan-400 font-mono font-medium text-sm">(व्यूह)</span>
+                VYUH <span className="text-cyan-400 font-mono font-semibold text-sm">(व्यूह)</span>
               </h1>
-              <span className="badge badge-cyan text-[10px] py-0.5">Track 02: AI Risk Manager</span>
+              <span className="badge badge-cyan text-[10px]">Track 02: AI Risk Manager</span>
             </div>
             <p className="text-xs text-slate-400 font-mono">
               Temporal Relational Fraud Intelligence Gateway
@@ -34,19 +34,19 @@ export default function Header({ activeTab, setActiveTab }) {
 
         {/* Status Indicators */}
         <div className="hidden lg:flex items-center gap-3 text-xs font-mono">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-md border" style={{ background: 'rgba(16, 185, 129, 0.1)', borderColor: 'rgba(16, 185, 129, 0.3)', color: '#34d399' }}>
             <span className="pulse-dot bg-emerald-400"></span>
-            Inference: P50 = 7.46ms (Single-Core CPU)
+            <span>Live ML Engine: P50 = 7.46ms</span>
           </div>
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-            100% Defense-Only
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-md border" style={{ background: 'rgba(56, 189, 248, 0.1)', borderColor: 'rgba(56, 189, 248, 0.3)', color: '#38bdf8' }}>
+            <span>Strictly Defense-Only</span>
           </div>
         </div>
       </div>
 
       {/* Navigation Tabs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <nav className="flex space-x-1 overflow-x-auto py-2 no-scrollbar">
+        <nav className="flex items-center gap-2 overflow-x-auto py-2" style={{ borderTop: '1px solid rgba(30, 41, 59, 0.5)' }}>
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -54,14 +54,10 @@ export default function Header({ activeTab, setActiveTab }) {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
-                  isActive
-                    ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/40 shadow-sm shadow-cyan-500/20'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 border border-transparent'
-                }`}
+                className={`nav-tab-btn ${isActive ? 'active' : ''}`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-cyan-400' : 'text-slate-500'}`} />
-                {item.label}
+                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
+                <span>{item.label}</span>
               </button>
             );
           })}
