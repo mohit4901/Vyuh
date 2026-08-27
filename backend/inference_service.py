@@ -605,19 +605,24 @@ class InferenceHTTPHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
-        if parsed.path == "/health":
+        if parsed.path in ["/health", "/", ""]:
             self._set_headers(200)
             self.wfile.write(json.dumps({
                 "status": "healthy",
-                "service": "VYUH 2.0 Dynamic Graph & Online LightGBM Inference Microservice",
+                "service": "VYUH Dynamic Graph & Online LightGBM Inference Microservice",
                 "port": 5001,
+                "endpoints": {
+                    "health": "GET /health",
+                    "score": "POST /score",
+                    "investigate": "POST /investigate"
+                },
                 "onlineModelLoaded": MANAGER.online_model is not None,
                 "graphNodes": MANAGER.live_graph.G.number_of_nodes(),
                 "graphEdges": MANAGER.live_graph.G.number_of_edges()
-            }).encode("utf-8"))
+            }, indent=2).encode("utf-8"))
         else:
             self._set_headers(404)
-            self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode("utf-8"))
+            self.wfile.write(json.dumps({"error": f"Endpoint '{parsed.path}' not found"}).encode("utf-8"))
 
     def do_POST(self):
         parsed = urlparse(self.path)
