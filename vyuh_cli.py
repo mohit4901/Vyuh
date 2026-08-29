@@ -113,48 +113,58 @@ def format_verdict(action):
 class VyuhCLI:
     def __init__(self):
         self.manager = MANAGER
+        self.session_txns = []
 
     def evaluate_interactive_transaction(self):
-        print_box_header("TEST A PAYMENT TRANSACTION IN REAL TIME", "⚡")
-        print(f"{C_CYAN}│{C_RESET}  {C_WHITE}Enter payment details to test how the AI evaluates it in 7ms:{C_RESET}")
-        print(f"{C_CYAN}│{C_RESET}  {C_GRAY}(You can press [Enter] at each step to use sample test data){C_RESET}")
-        print(f"{C_CYAN}│{C_RESET}")
-
-        try:
-            amt_input = input(f"{C_CYAN}│{C_RESET}  {C_CYAN}1.{C_RESET} {C_BOLD}Payment Amount (₹ INR){C_RESET} {C_GRAY}[Example: 499.00]{C_RESET}: ").strip()
-            amount = float(amt_input) if amt_input else 499.0
-
-            card_input = input(f"{C_CYAN}│{C_RESET}  {C_CYAN}2.{C_RESET} {C_BOLD}Card Number / Token{C_RESET}   {C_GRAY}[Example: CARD_HDFC_01]{C_RESET}: ").strip()
-            card_id = card_input if card_input else "CARD_HDFC_01"
-
-            dev_input = input(f"{C_CYAN}│{C_RESET}  {C_CYAN}3.{C_RESET} {C_BOLD}Device / Phone ID{C_RESET}     {C_GRAY}[Example: IPHONE_15_PRO]{C_RESET}: ").strip()
-            device_id = dev_input if dev_input else "IPHONE_15_PRO"
-
-            email_input = input(f"{C_CYAN}│{C_RESET}  {C_CYAN}4.{C_RESET} {C_BOLD}Customer Email{C_RESET}        {C_GRAY}[Example: customer@gmail.com]{C_RESET}: ").strip()
-            email = email_input if email_input else "customer@gmail.com"
-
-            order_id = f"ORDER-{int(time.time()*1000)%100000}"
-
-            payload = {
-                "orderId": order_id,
-                "amount": amount,
-                "cardId": card_id,
-                "deviceId": device_id,
-                "email": email
-            }
-
+        while True:
+            print_box_header("TEST PAYMENT TRANSACTIONS (LIVE CONTINUOUS TESTER)", "⚡")
+            print(f"{C_CYAN}│{C_RESET}  {C_WHITE}Enter payment details below to see how the AI evaluates it in 7ms:{C_RESET}")
+            print(f"{C_CYAN}│{C_RESET}  {C_GRAY}(Try entering the SAME Card/Device multiple times with different names to see risk escalate!){C_RESET}")
             print(f"{C_CYAN}│{C_RESET}")
-            print(f"{C_CYAN}│{C_RESET}  {C_YELLOW}⚡ Analyzing payment amount + device history through AI models...{C_RESET}")
-            
-            t_start = time.perf_counter()
-            result = self.manager.score_transaction(payload)
-            t_latency = (time.perf_counter() - t_start) * 1000
 
-            print_box_footer()
-            self.render_scoring_result(payload, result, t_latency)
+            try:
+                amt_input = input(f"{C_CYAN}│{C_RESET}  {C_CYAN}1.{C_RESET} {C_BOLD}Payment Amount (₹ INR){C_RESET} {C_GRAY}[Example: 499.00]{C_RESET}: ").strip()
+                amount = float(amt_input) if amt_input else 499.0
 
-        except Exception as e:
-            print(f"\n{C_RED}✖ Error during evaluation: {e}{C_RESET}")
+                card_input = input(f"{C_CYAN}│{C_RESET}  {C_CYAN}2.{C_RESET} {C_BOLD}Card Number / Token{C_RESET}   {C_GRAY}[Example: CARD_HDFC_01]{C_RESET}: ").strip()
+                card_id = card_input if card_input else "CARD_HDFC_01"
+
+                dev_input = input(f"{C_CYAN}│{C_RESET}  {C_CYAN}3.{C_RESET} {C_BOLD}Device / Phone ID{C_RESET}     {C_GRAY}[Example: IPHONE_15_PRO]{C_RESET}: ").strip()
+                device_id = dev_input if dev_input else "IPHONE_15_PRO"
+
+                email_input = input(f"{C_CYAN}│{C_RESET}  {C_CYAN}4.{C_RESET} {C_BOLD}Customer Name / Email{C_RESET} {C_GRAY}[Example: customer@gmail.com]{C_RESET}: ").strip()
+                email = email_input if email_input else "customer@gmail.com"
+
+                order_id = f"ORDER-{int(time.time()*1000)%100000}"
+
+                payload = {
+                    "orderId": order_id,
+                    "amount": amount,
+                    "cardId": card_id,
+                    "deviceId": device_id,
+                    "email": email
+                }
+
+                print(f"{C_CYAN}│{C_RESET}")
+                print(f"{C_CYAN}│{C_RESET}  {C_YELLOW}⚡ Analyzing payment amount + device history through AI models...{C_RESET}")
+                
+                t_start = time.perf_counter()
+                result = self.manager.score_transaction(payload)
+                t_latency = (time.perf_counter() - t_start) * 1000
+
+                self.session_txns.append(payload)
+
+                print_box_footer()
+                self.render_scoring_result(payload, result, t_latency)
+
+                # Prompt for next payment in loop
+                repeat = input(f"\n {C_YELLOW}▶ Would you like to enter another payment? [Y/n, or press Enter]: {C_RESET}").strip().lower()
+                if repeat in ["n", "no", "exit", "q"]:
+                    break
+
+            except Exception as e:
+                print(f"\n{C_RED}✖ Error during evaluation: {e}{C_RESET}")
+                break
 
     def render_scoring_result(self, payload, result, latency_ms):
         scores = result.get("scores", {})
@@ -180,21 +190,39 @@ class VyuhCLI:
         print(f"{C_CYAN}│{C_RESET}  {render_gauge(p_final, width=24)}")
         print(f"{C_CYAN}├" + "─" * 92 + f"┤{C_RESET}")
 
-        # Why this decision was made
+        # Real-time memory alerts (Card & Device)
+        card_times = sum(1 for tx in self.session_txns if tx['cardId'] == payload['cardId'])
+        dev_times = sum(1 for tx in self.session_txns if tx['deviceId'] == payload['deviceId'])
         dev_deg = net_ctx.get('sharedDeviceDegree', 1)
-        print(f"{C_CYAN}│{C_RESET}  {C_BOLD}{C_WHITE}WHY DID THE AI MAKE THIS DECISION? (Plain English Summary){C_RESET}")
+
+        print(f"{C_CYAN}│{C_RESET}  {C_BOLD}{C_WHITE}LIVE NETWORK HISTORY & MEMORY AUDIT (CCTV CHECK){C_RESET}")
         print(f"{C_CYAN}│{C_RESET}")
         
-        if action == "ALLOW":
-            print(f"{C_CYAN}│{C_RESET}  ✔ {C_GREEN}{C_BOLD}Clean History:{C_RESET} This device has only {dev_deg} known account associated with it.")
-            print(f"{C_CYAN}│{C_RESET}  ✔ {C_GREEN}{C_BOLD}Normal Behavior:{C_RESET} No rapid bot bursts or suspicious card rotations detected.")
-            print(f"{C_CYAN}│{C_RESET}  ✔ {C_GREEN}{C_BOLD}Customer Experience:{C_RESET} Zero friction applied. Checkout completes in 1 click.")
-        elif action == "STEP_UP_AUTH":
-            print(f"{C_CYAN}│{C_RESET}  ⚡ {C_YELLOW}{C_BOLD}Moderate Device Sharing:{C_RESET} This device has {dev_deg} accounts associated with it (e.g. Office Wi-Fi).")
-            print(f"{C_CYAN}│{C_RESET}  ⚡ {C_YELLOW}{C_BOLD}Non-Destructive Safety:{C_RESET} Instead of blocking the buyer, we send an OTP to verify identity.")
+        if card_times > 1:
+            diff_emails = set(tx['email'] for tx in self.session_txns if tx['cardId'] == payload['cardId'])
+            if len(diff_emails) > 1:
+                print(f"{C_CYAN}│{C_RESET}  {C_RED_BG}{C_WHITE}{C_BOLD} 🚨 CARD ALERT: {C_RESET} {C_RED}{C_BOLD}Card '{payload['cardId']}' has been used {card_times} times across {len(diff_emails)} DIFFERENT identities in this session!{C_RESET}")
+            else:
+                print(f"{C_CYAN}│{C_RESET}  {C_YELLOW}⚡ CARD NOTE:{C_RESET} Card '{payload['cardId']}' seen {card_times} times.")
         else:
-            print(f"{C_CYAN}│{C_RESET}  ⛔ {C_RED}{C_BOLD}Coordinated Attack:{C_RESET} High frequency card testing detected across shared hardware.")
-            print(f"{C_CYAN}│{C_RESET}  ⛔ {C_RED}{C_BOLD}Money Saved:{C_RESET} Transaction held before merchant suffers a chargeback fee.")
+            print(f"{C_CYAN}│{C_RESET}  ✔ {C_GREEN}Card History:{C_RESET} First time this card is seen in current session.")
+
+        if dev_times > 1:
+            diff_cards = set(tx['cardId'] for tx in self.session_txns if tx['deviceId'] == payload['deviceId'])
+            if len(diff_cards) > 1:
+                print(f"{C_CYAN}│{C_RESET}  {C_YELLOW_BG}{C_WHITE}{C_BOLD} ⚡ DEVICE ALERT: {C_RESET} {C_YELLOW}Device '{payload['deviceId']}' has attempted {len(diff_cards)} DIFFERENT cards in rapid succession!{C_RESET}")
+        
+        print(f"{C_CYAN}│{C_RESET}")
+        print(f"{C_CYAN}│{C_RESET}  {C_BOLD}{C_WHITE}WHY DID THE AI MAKE THIS DECISION?{C_RESET}")
+        if action == "ALLOW":
+            print(f"{C_CYAN}│{C_RESET}  ✔ {C_GREEN}{C_BOLD}Clean History:{C_RESET} Device has normal 1:1 binding with no suspicious card rotations.")
+            print(f"{C_CYAN}│{C_RESET}  ✔ {C_GREEN}{C_BOLD}Fast Checkout:{C_RESET} 1-click checkout approved without asking for OTP.")
+        elif action == "STEP_UP_AUTH":
+            print(f"{C_CYAN}│{C_RESET}  ⚡ {C_YELLOW}{C_BOLD}Moderate Risk Triggered:{C_RESET} Card/Device sharing pattern detected.")
+            print(f"{C_CYAN}│{C_RESET}  ⚡ {C_YELLOW}{C_BOLD}Action Taken:{C_RESET} We send an OTP/2FA challenge to verify genuine ownership before payment.")
+        else:
+            print(f"{C_CYAN}│{C_RESET}  ⛔ {C_RED}{C_BOLD}High Syndicate Risk:{C_RESET} Multiple cards rotating on same hardware.")
+            print(f"{C_CYAN}│{C_RESET}  ⛔ {C_RED}{C_BOLD}Action Taken:{C_RESET} Payment held to protect merchant from chargeback penalties.")
 
         print_box_footer()
 
@@ -330,11 +358,11 @@ class VyuhCLI:
                 print_banner()
                 
                 print(f"\n{C_WHITE}{C_BOLD} ⚡ WHAT WOULD YOU LIKE TO TEST? (SELECT AN OPTION):{C_RESET}\n")
-                print(f"   {C_CYAN}[ 1 ]{C_RESET} {C_WHITE}{C_BOLD}Test a Custom Payment{C_RESET}       {C_GRAY}──► Enter any Amount & Card to see instant AI verdict{C_RESET}")
-                print(f"   {C_CYAN}[ 2 ]{C_RESET} {C_WHITE}{C_BOLD}The ₹499 Coffee Shop Proof{C_RESET}  {C_GRAY}──► See how 1 user vs 4 coworkers vs 1 hacker changes risk{C_RESET}")
-                print(f"   {C_CYAN}[ 3 ]{C_RESET} {C_WHITE}{C_BOLD}Live Hacker Attack Test{C_RESET}     {C_GRAY}──► Watch AI catch a fraudster trying 5 stolen cards in 2s{C_RESET}")
-                print(f"   {C_CYAN}[ 4 ]{C_RESET} {C_WHITE}{C_BOLD}Business ROI & Accuracy{C_RESET}     {C_GRAY}──► Real numbers: +51% more fraud caught, 7ms speed{C_RESET}")
-                print(f"   {C_CYAN}[ 5 ]{C_RESET} {C_WHITE}{C_BOLD}AI Model Health Check{C_RESET}       {C_GRAY}──► Quick 5-sample automated verification test{C_RESET}")
+                print(f"   {C_CYAN}[ 1 ]{C_RESET} {C_WHITE}{C_BOLD}Test Payments (Multi-Card Continuous Tester){C_RESET} {C_GRAY}──► Enter multiple cards/names to see memory alerts{C_RESET}")
+                print(f"   {C_CYAN}[ 2 ]{C_RESET} {C_WHITE}{C_BOLD}The ₹499 Coffee Shop Proof{C_RESET}                   {C_GRAY}──► See how 1 user vs 4 coworkers vs 1 hacker changes risk{C_RESET}")
+                print(f"   {C_CYAN}[ 3 ]{C_RESET} {C_WHITE}{C_BOLD}Live Hacker Attack Test{C_RESET}                      {C_GRAY}──► Watch AI catch a fraudster trying 5 stolen cards in 2s{C_RESET}")
+                print(f"   {C_CYAN}[ 4 ]{C_RESET} {C_WHITE}{C_BOLD}Business ROI & Accuracy{C_RESET}                      {C_GRAY}──► Real numbers: +51% more fraud caught, 7ms speed{C_RESET}")
+                print(f"   {C_CYAN}[ 5 ]{C_RESET} {C_WHITE}{C_BOLD}AI Model Health Check{C_RESET}                        {C_GRAY}──► Quick 5-sample automated verification test{C_RESET}")
                 print(f"   {C_CYAN}[ 0 ]{C_RESET} {C_RED}{C_BOLD}Exit CLI{C_RESET}\n")
 
                 choice = input(f" {C_YELLOW}▶ Enter choice [1-5, 0]: {C_RESET}").strip()
