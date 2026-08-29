@@ -352,20 +352,25 @@ class VyuhCLI:
         print_box_footer()
 
     def run_menu(self):
+        next_override = None
         while True:
-            print_banner()
-            self.verify_model_hashes()
-            
-            print(f"\n{C_WHITE}{C_BOLD} ⚡ SELECT AN INTERACTIVE ACTION TO TEST THE LIVE SYSTEM:{C_RESET}\n")
-            print(f"   {C_CYAN}[ 1 ]{C_RESET} {C_WHITE}{C_BOLD}Evaluate Custom Transaction{C_RESET}       {C_GRAY}(Interactive Amount, Card, Device & Email input){C_RESET}")
-            print(f"   {C_CYAN}[ 2 ]{C_RESET} {C_WHITE}{C_BOLD}Run Canonical Counterfactual Proof{C_RESET} {C_GRAY}(Same ₹499 transaction across 3 relational contexts){C_RESET}")
-            print(f"   {C_CYAN}[ 3 ]{C_RESET} {C_WHITE}{C_BOLD}Live Stream Syndicate Burst Test{C_RESET}  {C_GRAY}(Fires 5 rapid transactions to watch degree scaling){C_RESET}")
-            print(f"   {C_CYAN}[ 4 ]{C_RESET} {C_WHITE}{C_BOLD}View Holdout Model Benchmarks{C_RESET}     {C_GRAY}(118K test set PR-AUC & 300-run Bootstrap 95% CI){C_RESET}")
-            print(f"   {C_CYAN}[ 5 ]{C_RESET} {C_WHITE}{C_BOLD}Run Mathematical Parity Audit{C_RESET}     {C_GRAY}(100% agreement check against serialized checkpoints){C_RESET}")
-            print(f"   {C_CYAN}[ 6 ]{C_RESET} {C_WHITE}{C_BOLD}Run Fail-Safe Kill-Test{C_RESET}           {C_GRAY}(Tests malformed payloads & microservice failure safety){C_RESET}")
-            print(f"   {C_CYAN}[ 0 ]{C_RESET} {C_RED}{C_BOLD}Exit CLI{C_RESET}\n")
+            if next_override is not None:
+                choice = next_override
+                next_override = None
+            else:
+                print_banner()
+                self.verify_model_hashes()
+                
+                print(f"\n{C_WHITE}{C_BOLD} ⚡ SELECT AN INTERACTIVE ACTION TO TEST THE LIVE SYSTEM:{C_RESET}\n")
+                print(f"   {C_CYAN}[ 1 ]{C_RESET} {C_WHITE}{C_BOLD}Evaluate Custom Transaction{C_RESET}       {C_GRAY}(Interactive Amount, Card, Device & Email input){C_RESET}")
+                print(f"   {C_CYAN}[ 2 ]{C_RESET} {C_WHITE}{C_BOLD}Run Canonical Counterfactual Proof{C_RESET} {C_GRAY}(Same ₹499 transaction across 3 relational contexts){C_RESET}")
+                print(f"   {C_CYAN}[ 3 ]{C_RESET} {C_WHITE}{C_BOLD}Live Stream Syndicate Burst Test{C_RESET}  {C_GRAY}(Fires 5 rapid transactions to watch degree scaling){C_RESET}")
+                print(f"   {C_CYAN}[ 4 ]{C_RESET} {C_WHITE}{C_BOLD}View Holdout Model Benchmarks{C_RESET}     {C_GRAY}(118K test set PR-AUC & 300-run Bootstrap 95% CI){C_RESET}")
+                print(f"   {C_CYAN}[ 5 ]{C_RESET} {C_WHITE}{C_BOLD}Run Mathematical Parity Audit{C_RESET}     {C_GRAY}(100% agreement check against serialized checkpoints){C_RESET}")
+                print(f"   {C_CYAN}[ 6 ]{C_RESET} {C_WHITE}{C_BOLD}Run Fail-Safe Kill-Test{C_RESET}           {C_GRAY}(Tests malformed payloads & microservice failure safety){C_RESET}")
+                print(f"   {C_CYAN}[ 0 ]{C_RESET} {C_RED}{C_BOLD}Exit CLI{C_RESET}\n")
 
-            choice = input(f" {C_YELLOW}▶ Enter option [1-6, 0]: {C_RESET}").strip()
+                choice = input(f" {C_YELLOW}▶ Enter option [1-6, 0]: {C_RESET}").strip()
 
             if choice == "1":
                 self.evaluate_interactive_transaction()
@@ -385,9 +390,11 @@ class VyuhCLI:
                 print(f"\n{C_CYAN}👋 Exiting VYUH Terminal Engine. Have a great demo!{C_RESET}\n")
                 break
             else:
-                print(f"\n{C_YELLOW}⚠ Invalid choice. Please enter a number between 1 and 6 (or 0).{C_RESET}")
+                print(f"\n{C_YELLOW}⚠ Invalid choice '{choice}'. Please enter a number between 1 and 6 (or 0).{C_RESET}")
 
-            input(f"\n{C_DIM}Press [Enter] to return to main dashboard...{C_RESET}")
+            ret_input = input(f"\n{C_DIM}Press [Enter] for main dashboard (or type next option 1-6 directly): {C_RESET}").strip()
+            if ret_input in ["1", "2", "3", "4", "5", "6", "0", "q", "exit"]:
+                next_override = ret_input
 
 if __name__ == "__main__":
     cli = VyuhCLI()
