@@ -448,23 +448,7 @@ Vyuh/
 │   ├── decision_engine.js         # Cost-calibrated policy & Python bridge client
 │   ├── inference_service.py       # Live in-memory graph & GBDT microservice (Port 5001)
 │   ├── package.json               # Backend Node.js manifest
-│   └── server.js                  # Express REST gateway & static file server (Port 3000)
-│
-├── frontend/
-│   ├── index.html                 # Single-page application entry
-│   ├── package.json               # Frontend dependencies & Vite configuration
-│   ├── vite.config.js             # Vite build configuration
-│   └── src/
-│       ├── App.jsx                # Main application component & tab router
-│       ├── index.css              # Design system & dark theme styling
-│       └── components/
-│           ├── AuditTrail.jsx            # Real-time immutable decision audit log
-│           ├── BenchmarksView.jsx        # Academic benchmarks, ROC/PR curves, & CI
-│           ├── CostDial.jsx              # Interactive economic threshold slider
-│           ├── Header.jsx                # Header bar & system status
-│           ├── InvestigationCopilot.jsx  # Forensic copilot investigation chat
-│           ├── NetworkGraph.jsx          # Live Cytoscape.js interactive entity graph
-│           └── TwoWorldsDemo.jsx         # Canonical counterfactual comparison view
+│   └── server.js                  # Express REST API gateway (Port 3000)
 │
 ├── models/
 │   ├── feature_engineering.py     # Tabular feature transformation pipeline
@@ -494,9 +478,7 @@ Vyuh/
 │
 ├── tests/
 │   ├── test_adversarial_deep_audit.py # Multi-regime adversarial audit
-│   ├── test_failure_injection.py      # Microservice failure recovery kill test
-│   ├── test_http_end_to_end.py        # End-to-end HTTP integration test
-│   ├── test_online_offline_parity.py  # 100-sample mathematical parity test
+│   ├── test_api.js                    # Node.js REST API endpoint test
 │   ├── test_failure_injection.py      # Malformed inputs & fail-safe fallback verification
 │   ├── test_http_end_to_end.py        # Dual-runtime HTTP REST integration test
 │   ├── test_online_offline_parity.py  # 100-sample live engine vs offline model parity test
@@ -646,7 +628,7 @@ curl -X POST http://localhost:3000/api/score \
   -d '{"orderId":"ORD-01","amount":499.0,"cardId":"CARD_A","deviceId":"DEV_X","email":"user@test.com"}'
 ```
 
-Open your browser at **`http://localhost:3000`** to access the dashboard.
+The REST API is now live at **`http://localhost:3000`**. Use `./vyuh` for the interactive terminal dashboard.
 
 ---
 
@@ -660,7 +642,7 @@ docker compose up --build
 
 ### What happens:
 1. **`inference-engine`**: Container starts Python microservice on port `5001` with internal healthchecks.
-2. **`gateway-dashboard`**: Container waits for `inference-engine` healthcheck to pass, starts Node.js on port `3000`, and serves the pre-compiled React dashboard.
+2. **`gateway`**: Container waits for `inference-engine` healthcheck to pass, starts Node.js REST API on port `3000`.
 
 ### Stop Containers:
 ```bash
@@ -684,15 +666,31 @@ VYUH is configured via `.env` (or environment variables):
 
 ## 22. Running the Canonical Live Demo
 
-1. Open `http://localhost:3000` in your browser.
-2. Navigate to the **"Two Worlds / Counterfactual"** tab.
-3. Observe the canonical ₹499 transaction payload ($P_{\text{tabular}} = 3.84\%$).
-4. Click through the three scenario buttons:
-   * **Click "Scenario 1: Isolated Checkout"**: Risk = **`10.90%`**, Action = **`ALLOW`**.
-   * **Click "Scenario 2: Office NAT (8h Spaced)"**: Risk = **`16.43%`**, Action = **`STEP_UP_AUTH`**.
-   * **Click "Scenario 3: Bot Burst (10 Accts / 30s)"**: Risk = **`68.50%`**, Action = **`FLAG_HUMAN_REVIEW`**.
-5. Switch to the **"Live Entity Graph"** tab to inspect the real-time bipartite topology.
-6. Switch to the **"Economic Cost Dial"** tab to adjust merchant ticket values and see real-time INR loss curves.
+### Terminal Demo (Recommended — Instant, Zero Setup)
+
+```bash
+# Run canonical counterfactual demonstration (Context A, B, and C)
+./vyuh --demo
+
+# Run live 5-transaction syndicate burst escalation simulation
+./vyuh --stream
+
+# Display 118K holdout PR-AUC metrics and 300 bootstrap iterations
+./vyuh --benchmarks
+```
+
+The canonical demo demonstrates the core thesis:
+* **Context A (Isolated Checkout)**: Risk = **`10.90%`**, Action = **`ALLOW`**.
+* **Context B (Office NAT, 8h Spaced)**: Risk = **`16.43%`**, Action = **`STEP_UP_AUTH`**.
+* **Context C (Bot Burst, 10 Accts / 30s)**: Risk = **`68.50%`**, Action = **`FLAG_HUMAN_REVIEW`**.
+
+### REST API Demo (Requires Services Running)
+
+```bash
+curl -X POST http://localhost:3000/api/score \
+  -H "Content-Type: application/json" \
+  -d '{"orderId":"DEMO-001","amount":499.0,"cardId":"CARD_A","deviceId":"DEV_X","email":"user@test.com"}'
+```
 
 ---
 
@@ -839,8 +837,8 @@ git clone https://github.com/mohit4901/Vyuh.git && cd Vyuh
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# 3. Install & Build Web Gateway
-cd backend && npm install && cd ../frontend && npm install && npm run build && cd ..
+# 3. Install REST API Gateway Dependencies
+cd backend && npm install && cd ..
 
 # 4. Run Automated Submission Integrity Suite
 python benchmarks/final_submission_validation.py

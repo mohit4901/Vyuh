@@ -143,7 +143,7 @@ def extract_strict_temporal_features(df, dataset_name="train"):
                 dq_ctx.popleft()
 
             card_uniq_devs_24h[i] = len(set(d for _, d in dq_cd))
-            card_uniq_emails_24h[i] = len(set(e for _, e in dq_e))
+            card_uniq_emails_24h[i] = len(set(e for _, e in dq_ce))
             card_txn_vel_1h[i] = len(dq_ctx)
             total_cnt = card_total_txns[card]
             card_dev_switch_rate[i] = len(card_total_devs[card]) / max(1, total_cnt)

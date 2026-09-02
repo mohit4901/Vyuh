@@ -19,7 +19,7 @@ services:
       start_period: 5s
     restart: unless-stopped
 
-  gateway-dashboard:
+  gateway:
     build:
       context: .
       dockerfile: Dockerfile

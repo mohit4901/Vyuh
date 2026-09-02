@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
     track: 'Razorpay AI Buildathon 2026 · Track 02: AI Risk Manager',
     status: 'online',
     mode: 'Strictly Defense-Only',
-    cli: 'Run ./vyuh (macOS/Linux) or vyuh.bat (Windows) for interactive terminal dashboard',
+    cli: 'Run ./vyuh (macOS/Linux) or vyuh.bat (Windows) for interactive terminal engine',
     endpoints: {
       health: 'GET /api/health',
       stats: 'GET /api/stats',

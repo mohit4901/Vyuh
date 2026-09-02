@@ -22,12 +22,14 @@ backend/node_modules/
 data/raw/
 data/processed/
 *.csv
-*.pkl
 *.joblib
 !data/graphs/*.json
 
-# Model checkpoints
-models/checkpoints/*.pkl
+# Ignore generic pkl files (data, caches), but whitelist model checkpoints
+*.pkl
+!models/checkpoints/*.pkl
+
+# Large deep learning weights (>100MB exceeds GitHub limits)
 models/checkpoints/*.pt
 models/checkpoints/*.pth
 models/checkpoints/*.bin
@@ -46,7 +48,6 @@ models/checkpoints/*.bin
 Thumbs.db
 .matplotlib/
 dist/
-frontend/dist/
 
 # Jupyter
 .ipynb_checkpoints/
