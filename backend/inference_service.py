@@ -477,14 +477,32 @@ class ModelManager:
         else:
             p_graph_ml = 0.05
 
-        # Dynamic Enterprise Network Guardrails (Confirmed Fraud Proximity & Active Syndicates)
+        # ─────────────────────────────────────────────────────────────────────
+        # TIER-4: Deterministic Fraud-Proximity Safety Guardrail
+        # ─────────────────────────────────────────────────────────────────────
+        # This is an explicit, documented rule-based safety floor that operates
+        # AFTER the learned GBDT pipeline. It is NOT part of the ML model.
+        # Purpose: When hard behavioral evidence exists (confirmed fraud in
+        # 2-hop graph neighborhood, or active coordinated card-cycling burst),
+        # the system applies a deterministic risk floor. This is equivalent to
+        # a known-fraud blacklist response — a defense mechanism independent of
+        # probabilistic ML scoring.
+        #
+        # Design Rationale: ML models are trained on historical distributions.
+        # When a device is directly linked to a confirmed fraud node, no ML
+        # inference is needed — the structural evidence is conclusive.
+        # ─────────────────────────────────────────────────────────────────────
         syndicate_guardrail = 0.0
         if fraud_2hop >= 1:
-            syndicate_guardrail = 0.88  # Immediate 2-Hop Known Fraud Association Guardrail
+            # Confirmed fraud node within 2-hop graph neighborhood.
+            # This is hard structural evidence, not probabilistic inference.
+            syndicate_guardrail = 0.88
         elif (dev_cards >= 3 and dev_emails >= 2) or (dev_cards >= 5 and dev_emails >= 2) or (burst_vel >= 4 and dev_emails >= 2):
-            # Coordinated multi-identity card cycling across shared hardware emulator
+            # Active coordinated multi-identity card cycling on shared hardware.
+            # Velocity + multi-identity combination is a deterministic syndicate signal.
             syndicate_guardrail = min(0.92, 0.50 + 0.06 * dev_cards + 0.04 * burst_vel)
         elif card_emails >= 3:
+            # Single card used across 3+ distinct customer identities.
             syndicate_guardrail = min(0.75, 0.35 + 0.08 * card_emails)
 
         p_graph = max(p_graph_ml, syndicate_guardrail) if syndicate_guardrail > 0 else max(p_graph_ml, 0.05)
@@ -507,11 +525,14 @@ class ModelManager:
 
         p_joint_raw = p_joint
 
-        # Pure Model Risk with Enterprise Fraud Syndicate Guardrail
+        # Combine Tier-3 learned model output with Tier-4 deterministic safety guardrail.
+        # When the guardrail activates (hard fraud-proximity evidence), it sets the risk floor.
+        # Otherwise, the final risk is purely the learned calibrated model probability.
         if syndicate_guardrail >= 0.25:
+            # Tier-4 guardrail active: hard structural evidence overrides probabilistic score.
             p_final = max(p_joint, syndicate_guardrail)
         else:
-            # 100% Pure learned calibrated model probability (Zero heuristic overrides)
+            # No guardrail activation: 100% learned calibrated GBDT probability.
             p_final = p_joint
 
         final_risk = round(p_final, 4)
@@ -598,8 +619,8 @@ class ModelManager:
                 "isolatedRiskScore": round(p_final_iso, 4),
                 "graphHeuristicContribution": round(max(0.0, final_risk - p_final_iso), 4),
                 "networkRiskScore": final_risk,
-                "riskSynthesisMethod": "ML-driven risk scoring with deterministic safety guardrails",
-                "confidence": "HIGH (Learned Isotonic + Safety Guardrails)"
+                "riskSynthesisMethod": "Tier-1 Tabular GBDT + Tier-2 Graph GBDT + Tier-3 Isotonic Calibration + Tier-4 Fraud-Proximity Safety Guardrail",
+                "confidence": "HIGH (Learned Isotonic Calibrated)" if syndicate_guardrail < 0.25 else "HIGH (Learned + Fraud-Proximity Guardrail Active)"
             },
             "decision": {
                 "action": action,

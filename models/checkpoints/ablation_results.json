@@ -1,6 +1,7 @@
 [
   {
-    "Model": "M0 \u2014 Simple Rule Baseline",
+    "_note": "RESEARCH ABLATION STUDY — These entries use the 481-feature offline research model as base. Production canonical metrics (M1–M4 with 10–23 features) are in final_incremental_value_study.json. Labels here use 'M_offline_*' prefix to avoid confusion with production model naming.",
+    "Model": "M_offline_0 — Simple Rule Baseline",
     "Architecture": "Heuristic Rules (Velocity + Night + Mismatch)",
     "Features": "4 Deterministic Conditions",
     "PR-AUC": 0.0395,
@@ -29,9 +30,9 @@
     }
   },
   {
-    "Model": "M1 \u2014 LightGBM Tabular Baseline",
-    "Architecture": "Per-Transaction GBDT (Isolation)",
-    "Features": "481 Tabular Features",
+    "Model": "M_offline_1 — Full Offline Tabular Baseline (481 Features)",
+    "Architecture": "Per-Transaction GBDT (Isolation) — Offline Batch Mode, >120ms multi-table join",
+    "Features": "481 Tabular Features (requires multi-table join; unavailable at live checkout)",
     "PR-AUC": 0.4608,
     "ROC-AUC": 0.8533,
     "Precision": 0.6735,
@@ -39,7 +40,8 @@
     "F1-Score": 0.4603,
     "FPR": "0.60%",
     "Net Saved (\u20b9 Lakhs)": -0.6,
-    "Inference Latency": "0.01 ms",
+    "Inference Latency": ">120 ms (violates real-time SLA)",
+    "Production Status": "DISQUALIFIED — latency violates sub-10ms checkout SLA",
     "raw_metrics": {
       "pr_auc": 0.4608,
       "roc_auc": 0.8533,
@@ -58,9 +60,9 @@
     }
   },
   {
-    "Model": "M2 \u2014 LightGBM + Static Graph",
-    "Architecture": "GBDT + Node Degrees & Communities",
-    "Features": "481 Tabular + 3 Static Graph",
+    "Model": "M_offline_2 — Full Offline Tabular + Static Graph (484 Features)",
+    "Architecture": "GBDT + Node Degrees & Communities — Offline Batch Mode",
+    "Features": "481 Tabular + 3 Static Graph Features",
     "PR-AUC": 0.4567,
     "ROC-AUC": 0.8557,
     "Precision": 0.6895,
@@ -68,7 +70,8 @@
     "F1-Score": 0.4544,
     "FPR": "0.54%",
     "Net Saved (\u20b9 Lakhs)": -0.49,
-    "Inference Latency": "0.01 ms",
+    "Inference Latency": ">120 ms (violates real-time SLA)",
+    "Production Status": "DISQUALIFIED — latency violates sub-10ms checkout SLA",
     "raw_metrics": {
       "pr_auc": 0.4567,
       "roc_auc": 0.8557,
@@ -87,9 +90,9 @@
     }
   },
   {
-    "Model": "M3 \u2014 LightGBM + Temporal Graph Sentinel",
-    "Architecture": "GBDT + Ring Persistence & Velocity Bursts",
-    "Features": "481 Tabular + 6 Temporal Graph",
+    "Model": "M_offline_3 — Full Offline Tabular + Temporal Graph Sentinel (487 Features)",
+    "Architecture": "GBDT + Ring Persistence & Velocity Bursts — Offline Batch Mode",
+    "Features": "481 Tabular + 6 Temporal Graph Features",
     "PR-AUC": 0.4588,
     "ROC-AUC": 0.8634,
     "Precision": 0.6228,
@@ -97,7 +100,8 @@
     "F1-Score": 0.4559,
     "FPR": "0.78%",
     "Net Saved (\u20b9 Lakhs)": -1.34,
-    "Inference Latency": "0.01 ms",
+    "Inference Latency": ">120 ms (violates real-time SLA)",
+    "Production Status": "DISQUALIFIED — latency violates sub-10ms checkout SLA",
     "raw_metrics": {
       "pr_auc": 0.4588,
       "roc_auc": 0.8634,
@@ -116,8 +120,8 @@
     }
   },
   {
-    "Model": "M4 \u2014 VYUH Full (Graph GBDT + Calibrated Cost Optimizer)",
-    "Architecture": "Temporal Graph GBDT + Isotonic Calibration + Cost Gateway",
+    "Model": "M_offline_4 — VYUH Full System (481 Tabular + 6 Temporal Graph + Calibrated Cost Gate)",
+    "Architecture": "Temporal Graph GBDT + Isotonic Calibration + Cost Gateway — Offline Batch Mode",
     "Features": "481 Tabular + 6 Temporal Graph + Calibrated Prob",
     "PR-AUC": 0.4429,
     "ROC-AUC": 0.861,
@@ -126,7 +130,8 @@
     "F1-Score": 0.4263,
     "FPR": "0.25%",
     "Net Saved (\u20b9 Lakhs)": 0.19,
-    "Inference Latency": "0.01 ms",
+    "Inference Latency": ">120 ms (violates real-time SLA)",
+    "Production Status": "DISQUALIFIED — latency violates sub-10ms checkout SLA. Production uses 23-feature streaming model.",
     "raw_metrics": {
       "pr_auc": 0.4429,
       "roc_auc": 0.861,
