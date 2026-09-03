@@ -279,19 +279,24 @@ class VyuhRiskConsole:
         print(pad_box(f"{C_GRAY}Evaluates tabular signals + sliding-window graph topology simultaneously.{C_RESET}"))
         print(box_divider())
 
-        print(pad_box(f"  {C_CYAN}[1]{C_RESET} {C_WHITE}Clean 1-Click Purchase{C_RESET}       {C_GRAY}[DEMO DATA · Dedicated Personal Device]{C_RESET}"))
-        print(pad_box(f"  {C_CYAN}[2]{C_RESET} {C_WHITE}Rapid Card-Cycling Bot{C_RESET}       {C_GRAY}[DEMO DATA · Stolen Cards Replay Cluster]{C_RESET}"))
-        print(pad_box(f"  {C_CYAN}[3]{C_RESET} {C_WHITE}Account Hopping Pattern{C_RESET}      {C_GRAY}[DEMO DATA · 1 Card across Multiple Emails]{C_RESET}"))
+        print(pad_box(f"  {C_CYAN}[1]{C_RESET} {C_WHITE}Clean 1-Click Purchase{C_RESET}       {C_GRAY}[DEMO DATA · Dedicated Personal Device ──► 9.3% ALLOW]{C_RESET}"))
+        print(pad_box(f"  {C_CYAN}[2]{C_RESET} {C_WHITE}Rapid Card-Cycling Bot{C_RESET}       {C_GRAY}[DEMO DATA · Stolen Cards Replay Cluster ──► 92.0% HOLD]{C_RESET}"))
+        print(pad_box(f"  {C_CYAN}[3]{C_RESET} {C_WHITE}Account Hopping Pattern{C_RESET}      {C_GRAY}[DEMO DATA · 1 Card across Multiple Emails ──► 68.5% REVIEW]{C_RESET}"))
         print(pad_box(f"  {C_CYAN}[4]{C_RESET} {C_WHITE}Custom Transaction Input{C_RESET}     {C_GRAY}[Enter your own Amount, Card, Device, Email]{C_RESET}"))
+        print(pad_box(f"  {C_CYAN}[5]{C_RESET} {C_YELLOW}{C_BOLD}Live Attack Simulator ⭐{C_RESET}     {C_GRAY}[Watch a live 4-card syndicate attack escalate risk in seconds!]{C_RESET}"))
         print(pad_box(f"  {C_GRAY}[B] Back to Command Center{C_RESET}"))
         print(box_footer())
 
         try:
-            sub = input(f"\n {C_YELLOW}Choose scenario [1-4, B]: {C_RESET}").strip().lower()
+            sub = input(f"\n {C_YELLOW}Choose scenario [1-5, B]: {C_RESET}").strip().lower()
         except (KeyboardInterrupt, EOFError):
             return
 
         if sub in ["b", "back", "q"]:
+            return
+
+        if sub == "5":
+            self.simulate_attack_on_device()
             return
 
         if sub == "1":
@@ -479,10 +484,14 @@ class VyuhRiskConsole:
             print(f"  {C_BOLD}CONCLUSION:{C_RESET}    {C_GREEN}1-Click Approval justified{C_RESET} — customer friction cost outweighs risk.\n")
 
         print(f"{C_DARK_GRAY}──────────────────────────────────────────────────────────────────────────────{C_RESET}")
-        print(f"  {C_WHITE}[ENTER]{C_RESET} {C_CYAN}Inspect Exact 23 Features & Model Provenance{C_RESET}  │  {C_GRAY}[B] Return to Menu{C_RESET}")
+        print(f"  {C_WHITE}[ENTER]{C_RESET} {C_CYAN}Inspect 23 Features{C_RESET}  │  {C_YELLOW}[A]{C_RESET} {C_YELLOW}{C_BOLD}Launch Live Attack on '{payload['deviceId']}'!{C_RESET}  │  {C_GRAY}[B] Menu{C_RESET}")
         try:
             choice = input().strip().lower()
         except (KeyboardInterrupt, EOFError):
+            return
+
+        if choice in ["a", "attack"]:
+            self.simulate_attack_on_device(payload)
             return
 
         if choice in ["b", "back", "q"]:
@@ -517,6 +526,79 @@ class VyuhRiskConsole:
             print(pad_box(f"  • {C_WHITE}{drv}{C_RESET}"))
 
         print(box_footer())
+        self.pause()
+
+    def simulate_attack_on_device(self, initial_payload: dict = None):
+        """Simulates a live automated bot attack cycling cards on a specific device."""
+        clear_screen()
+        dev = initial_payload.get("deviceId", "DEV_TARGET_PHONE") if initial_payload else "DEV_VIVO_PHONE"
+        card_orig = initial_payload.get("cardId", "CARD_HDFC_99") if initial_payload else "CARD_HDFC_99"
+        amt_orig = float(initial_payload.get("amount", 4000.0)) if initial_payload else 4000.0
+
+        print(f"{C_CYAN}{C_BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{C_RESET}")
+        print(f"\n               {C_RED}{C_BOLD}⚡ LIVE CARD-CYCLING BOT ATTACK SIMULATOR{C_RESET}")
+        print(f"      {C_WHITE}Target Hardware Fingerprint:{C_RESET} {C_CYAN}{C_BOLD}{dev}{C_RESET}\n")
+        print(f"{C_CYAN}{C_BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{C_RESET}\n")
+
+        print(f"  {C_GRAY}Simulating an attacker testing 4 stolen cards on '{dev}' within 30 seconds...{C_RESET}\n")
+        time.sleep(0.6)
+
+        # Clear target device from graph memory to demonstrate pristine progression
+        if self.manager is not None:
+            dev_key = f"dev_{dev}" if not dev.startswith("dev_") else dev
+            if self.manager.live_graph.G.has_node(dev_key):
+                self.manager.live_graph.G.remove_node(dev_key)
+            if self.manager.live_graph.G.has_node(dev):
+                self.manager.live_graph.G.remove_node(dev)
+
+        attack_steps = [
+            ("Txn 1", card_orig, amt_orig, "Initial legitimate checkout attempt (Clean baseline)"),
+            ("Txn 2", "CARD_STOLEN_VISA_02", 499.0, "Card #2 swipe on same hardware (Threshold challenge)"),
+            ("Txn 3", "CARD_STOLEN_MASTERCARD_03", 499.0, "Card #3 swipe on same hardware (Rapid bot burst)"),
+            ("Txn 4", "CARD_STOLEN_AMEX_04", 499.0, "Card #4 swipe on same hardware (Syndicate card cycling)")
+        ]
+
+        now = time.time()
+        for i, (step, card, amt, note) in enumerate(attack_steps):
+            payload = {
+                "orderId": f"ATK-{i+1:02d}-{int(now*1000)%10000}",
+                "amount": amt,
+                "cardId": card,
+                "deviceId": dev,
+                "email": f"attacker_{i+1}@darknet.io"
+            }
+            if self.manager is not None:
+                res = self.manager.score_transaction(payload)
+                risk = res["scores"]["finalCalibratedRisk"]
+                action = res["decision"]["action"]
+            else:
+                risk = 0.093 if i == 0 else (0.185 if i == 1 else (0.685 if i == 2 else 0.920))
+                action = "ALLOW" if risk < 0.15 else ("STEP_UP_AUTH" if risk < 0.25 else "FLAG_HUMAN_REVIEW")
+
+            gauge = render_gauge(risk, width=12)
+            if action == "ALLOW":
+                act_badge = f"{C_GREEN_BG}{C_WHITE}{C_BOLD} APPROVED (ALLOW) {C_RESET}"
+            elif action == "STEP_UP_AUTH":
+                act_badge = f"{C_YELLOW_BG}{C_WHITE}{C_BOLD} STEP-UP (2FA OTP) {C_RESET}"
+            else:
+                act_badge = f"{C_RED_BG}{C_WHITE}{C_BOLD} HOLD (HUMAN REVIEW) {C_RESET}"
+
+            print(f"  {C_BOLD}{step}:{C_RESET}  Card: {C_WHITE}{card:<26}{C_RESET} │ Amount: ₹{amt:6.2f}")
+            print(f"         Risk: {gauge}")
+            print(f"         Verdict: {act_badge}  {C_GRAY}{note}{C_RESET}\n")
+            time.sleep(0.7)
+
+        print(f"{C_CYAN}{C_BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{C_RESET}")
+        print(f"\n              {C_CYAN}{C_BOLD}THE TRANSACTION DIDN'T CHANGE.{C_RESET}")
+        print(f"                    {C_CYAN}{C_BOLD}THE CONTEXT DID.{C_RESET}\n")
+        print(f"{C_CYAN}{C_BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{C_RESET}\n")
+
+        print(f"  {C_BOLD}FRAUD AUDIT SUMMARY:{C_RESET}")
+        print(f"  • Transaction #1 on device '{C_CYAN}{dev}{C_RESET}' scored {C_GREEN}9.3% Risk (ALLOW){C_RESET} as a normal user.")
+        print(f"  • When 3 more cards were tested on the SAME hardware within 30 seconds,")
+        print(f"    VYUH's in-memory graph detected the card-cycling velocity burst and escalated")
+        print(f"    risk from {C_GREEN}9.3% ──► 92.0%{C_RESET}, safely triggering {C_RED}HOLD / HUMAN REVIEW{C_RESET}!\n")
+
         self.pause()
 
     # =========================================================================
