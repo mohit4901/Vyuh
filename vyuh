@@ -1,8 +1,28 @@
 #!/usr/bin/env bash
+set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# 1. Prefer existing local virtualenv
 if [ -f "$SCRIPT_DIR/.venv/bin/python" ]; then
     PYTHON_BIN="$SCRIPT_DIR/.venv/bin/python"
-else
+elif command -v python3 &>/dev/null; then
     PYTHON_BIN="python3"
+elif command -v python &>/dev/null; then
+    PYTHON_BIN="python"
+else
+    echo "❌ Python 3.9+ is required to run VYUH."
+    exit 1
 fi
+
+# 2. Auto-bootstrap if essential packages are missing and .venv is absent
+if ! "$PYTHON_BIN" -c "import pandas, lightgbm, networkx" &>/dev/null; then
+    if [ ! -d "$SCRIPT_DIR/.venv" ]; then
+        echo "⚡ First run detected: Setting up isolated environment (.venv)..."
+        "$PYTHON_BIN" -m venv "$SCRIPT_DIR/.venv"
+        "$SCRIPT_DIR/.venv/bin/pip" install --quiet --upgrade pip
+        "$SCRIPT_DIR/.venv/bin/pip" install --quiet -r "$SCRIPT_DIR/requirements.txt"
+        PYTHON_BIN="$SCRIPT_DIR/.venv/bin/python"
+    fi
+fi
+
 exec "$PYTHON_BIN" "$SCRIPT_DIR/vyuh_cli.py" "$@"

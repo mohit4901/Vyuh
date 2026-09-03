@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080C14"/>
+      <stop offset="50%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+    <linearGradient id="cardA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06281E"/>
+      <stop offset="100%" stop-color="#041812"/>
+    </linearGradient>
+    <linearGradient id="cardB" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2D1115"/>
+      <stop offset="100%" stop-color="#1A0A0C"/>
+    </linearGradient>
+    <linearGradient id="greenGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <linearGradient id="redGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#F87171"/>
+    </linearGradient>
+    <linearGradient id="cyanText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <style>
+    .mono { font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace; }
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  </style>
+
+  <!-- Main Container -->
+  <rect width="920" height="540" rx="16" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="1.5" filter="url(#dropShadow)"/>
+
+  <!-- Window Chrome Top Bar -->
+  <rect width="920" height="42" rx="16" fill="#0B1120"/>
+  <rect y="30" width="920" height="12" fill="#0B1120"/>
+  <line x1="0" y1="42" x2="920" y2="42" stroke="#1E293B" stroke-width="1"/>
+
+  <!-- Window Controls -->
+  <circle cx="24" cy="21" r="6" fill="#EF4444" opacity="0.9"/>
+  <circle cx="44" cy="21" r="6" fill="#F59E0B" opacity="0.9"/>
+  <circle cx="64" cy="21" r="6" fill="#10B981" opacity="0.9"/>
+
+  <!-- Title -->
+  <text x="460" y="26" text-anchor="middle" class="mono" font-size="12" fill="#94A3B8" font-weight="600" letter-spacing="1">
+    VYUH // CANONICAL COUNTERFACTUAL DEMONSTRATION · 23-FEATURE REAL-TIME GBDT
+  </text>
+
+  <!-- Subtitle Tagline Banner -->
+  <rect x="36" y="58" width="848" height="44" rx="8" fill="#1E293B" fill-opacity="0.4" stroke="#334155" stroke-width="1"/>
+  <text x="460" y="86" text-anchor="middle" class="sans" font-size="17" font-weight="700" fill="url(#cyanText)" letter-spacing="1.5">
+    "THE TRANSACTION DIDN'T CHANGE. THE CONTEXT DID."
+  </text>
+
+  <!-- Invariant Payload Pill Box -->
+  <rect x="36" y="112" width="848" height="58" rx="8" fill="#0F172A" stroke="#1E293B" stroke-width="1"/>
+  <text x="56" y="132" class="mono" font-size="11" fill="#64748B" font-weight="700">IDENTICAL TRANSACTION PAYLOAD (BITWISE INVARIANT ACROSS BOTH CONTEXTS):</text>
+  <text x="56" y="154" class="mono" font-size="12" fill="#F8FAFC">
+    Amount: <tspan fill="#34D399" font-weight="700">₹499.00</tspan>   │   Card: <tspan fill="#38BDF8">CARD_TITANIUM_88</tspan>   │   Device: <tspan fill="#CBD5E1">DEV_CHIP_99</tspan>   │   Time: <tspan fill="#F8FAFC">14:00 IST</tspan>
+  </text>
+
+  <!-- ================= LEFT: WORLD A ================= -->
+  <g transform="translate(36, 182)">
+    <rect width="414" height="270" rx="10" fill="url(#cardA)" stroke="#059669" stroke-width="1.5"/>
+    
+    <!-- Header -->
+    <rect width="414" height="38" rx="10" fill="#064E3B" fill-opacity="0.4"/>
+    <circle cx="24" cy="19" r="5" fill="#10B981"/>
+    <text x="38" y="23" class="sans" font-size="14" font-weight="800" fill="#34D399" letter-spacing="0.5">WORLD A: CLEAN ISOLATED CONTEXT</text>
+
+    <!-- Context Details -->
+    <text x="24" y="64" class="sans" font-size="12" fill="#94A3B8">Infrastructure Topology:</text>
+    <text x="24" y="82" class="sans" font-size="13" font-weight="600" fill="#F1F5F9">Dedicated Personal Device (1:1 Binding)</text>
+
+    <!-- Graph Metrics -->
+    <g transform="translate(24, 98)">
+      <rect width="366" height="56" rx="6" fill="#061F17" stroke="#047857" stroke-width="0.8"/>
+      <text x="14" y="22" class="mono" font-size="11" fill="#6EE7B7">• Device 24h Unique Cards:  1 card (Clean)</text>
+      <text x="14" y="42" class="mono" font-size="11" fill="#6EE7B7">• Temporal Velocity Burst:  1 txn / 60 mins</text>
+    </g>
+
+    <!-- Risk Gauge -->
+    <text x="24" y="180" class="mono" font-size="11" fill="#64748B" font-weight="700">CALIBRATED GBDT RISK SCORE:</text>
+    <rect x="24" y="190" width="280" height="14" rx="7" fill="#062E22"/>
+    <rect x="24" y="190" width="31" height="14" rx="7" fill="url(#greenGlow)"/>
+    <text x="316" y="202" class="mono" font-size="16" font-weight="800" fill="#34D399">10.9%</text>
+
+    <!-- Gateway Action Badge -->
+    <g transform="translate(24, 218)">
+      <rect width="366" height="36" rx="6" fill="#047857"/>
+      <text x="183" y="23" text-anchor="middle" class="sans" font-size="13" font-weight="800" fill="#FFFFFF" letter-spacing="1">
+        ✔ APPROVED (ALLOW) — 1-CLICK INSTANT
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT: WORLD B ================= -->
+  <g transform="translate(470, 182)">
+    <rect width="414" height="270" rx="10" fill="url(#cardB)" stroke="#DC2626" stroke-width="1.5"/>
+    
+    <!-- Header -->
+    <rect width="414" height="38" rx="10" fill="#7F1D1D" fill-opacity="0.4"/>
+    <circle cx="24" cy="19" r="5" fill="#EF4444"/>
+    <text x="38" y="23" class="sans" font-size="14" font-weight="800" fill="#F87171" letter-spacing="0.5">WORLD B: COORDINATED SYNDICATE</text>
+
+    <!-- Context Details -->
+    <text x="24" y="64" class="sans" font-size="12" fill="#94A3B8">Infrastructure Topology:</text>
+    <text x="24" y="82" class="sans" font-size="13" font-weight="600" fill="#FCA5A5">Same Hardware Cycled Across 10 Accounts / 30s</text>
+
+    <!-- Graph Metrics -->
+    <g transform="translate(24, 98)">
+      <rect width="366" height="56" rx="6" fill="#200B0E" stroke="#B91C1C" stroke-width="0.8"/>
+      <text x="14" y="22" class="mono" font-size="11" fill="#FCA5A5">• Device 24h Unique Cards:  8 cards (CRITICAL)</text>
+      <text x="14" y="42" class="mono" font-size="11" fill="#FCA5A5">• Temporal Velocity Burst:  10 txns in 30s (BOT)</text>
+    </g>
+
+    <!-- Risk Gauge -->
+    <text x="24" y="180" class="mono" font-size="11" fill="#64748B" font-weight="700">CALIBRATED GBDT RISK SCORE:</text>
+    <rect x="24" y="190" width="280" height="14" rx="7" fill="#3B1216"/>
+    <rect x="24" y="190" width="192" height="14" rx="7" fill="url(#redGlow)"/>
+    <text x="316" y="202" class="mono" font-size="16" font-weight="800" fill="#F87171">68.5%</text>
+
+    <!-- Gateway Action Badge -->
+    <g transform="translate(24, 218)">
+      <rect width="366" height="36" rx="6" fill="#B91C1C"/>
+      <text x="183" y="23" text-anchor="middle" class="sans" font-size="13" font-weight="800" fill="#FFFFFF" letter-spacing="1">
+        ⛔ FLAG HUMAN REVIEW — SETTLEMENT HELD
+      </text>
+    </g>
+  </g>
+
+  <!-- Bottom Footer Status -->
+  <rect x="36" y="466" width="848" height="56" rx="8" fill="#0B1120" stroke="#1E293B" stroke-width="1"/>
+  <text x="60" y="492" class="mono" font-size="12" fill="#E2E8F0">
+    <tspan fill="#38BDF8" font-weight="700">SUB-8ms EXECUTION:</tspan> P50 Latency: <tspan fill="#34D399" font-weight="700">7.46 ms</tspan>  │  Graph Traversal: <tspan fill="#34D399" font-weight="700">0.51 ms</tspan>  │  Zero GPU Required (CPU Only)
+  </text>
+  <text x="60" y="510" class="mono" font-size="11" fill="#64748B">
+    Tested on untouched 118,108 IEEE-CIS holdout transactions · 300 bootstrap iterations · ΔPR-AUC: +0.0333 (p &lt; 0.001)
+  </text>
+</svg>

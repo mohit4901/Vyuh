@@ -720,10 +720,17 @@ class VyuhRiskConsole:
         print(f"{C_CYAN}{C_BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{C_RESET}\n")
 
         print(f"  {C_WHITE}[ENTER]{C_RESET} {C_GRAY}Inspect Exact Feature Diff (What Changed?){C_RESET}  │  {C_GRAY}[B] Back{C_RESET}")
-        try:
-            nxt = input().strip().lower()
-        except (KeyboardInterrupt, EOFError):
-            return
+        
+        # Check if running in non-interactive demo mode
+        if not sys.stdin.isatty() or "--demo" in sys.argv:
+            print(f"\n  {C_CYAN}⚡ Auto-advancing to feature attribution in 1 second...{C_RESET}")
+            time.sleep(1.0)
+            nxt = ""
+        else:
+            try:
+                nxt = input().strip().lower()
+            except (KeyboardInterrupt, EOFError):
+                return
 
         if nxt in ["b", "back", "q"]:
             return
@@ -1147,6 +1154,9 @@ class VyuhRiskConsole:
         self.pause()
 
     def pause(self):
+        if not sys.stdin.isatty() or "--demo" in sys.argv:
+            print()
+            return
         try:
             print(f"\n  {C_DIM}Press [ENTER] to return to menu...{C_RESET}", end="", flush=True)
             input()
@@ -1168,11 +1178,12 @@ Usage:
   ./vyuh [FLAG]
 
 Flags:
+  --demo, -d            One-command instant signature demo
   --two-worlds, -w      Launch signature Two Worlds demonstration
   --benchmarks, -b      Inspect verified metrics on 118,108 held-out test transactions
   --analyze, -a         Run live transaction scoring
   --investigate, -i     Follow entity relationships and fraud rings
-  --decide, -d          Interactive threshold and cost-friction dial
+  --decide              Interactive threshold and cost-friction dial
   --audit               Inspect immutable decision log
   --system, -s          System health and live integration tests
   --serve, -p           Run background Python HTTP microservice (port 5001)
@@ -1186,11 +1197,11 @@ Flags:
                     console.manager = MANAGER
             except Exception:
                 pass
-        if arg in ["--benchmarks", "-b"]:
-            console.screen_prove_it()
-            return
-        elif arg in ["--two-worlds", "-w"]:
+        if arg in ["--two-worlds", "-w", "--demo"]:
             console.screen_two_worlds()
+            return
+        elif arg in ["--benchmarks", "-b"]:
+            console.screen_prove_it()
             return
         elif arg in ["--analyze", "-a"]:
             console.screen_analyze()

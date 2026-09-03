@@ -1,20 +1,23 @@
 # VYUH (व्यूह)
 
-### THE TRANSACTION DIDN'T CHANGE.
-### THE CONTEXT DID.
+### *THE TRANSACTION DIDN'T CHANGE. THE CONTEXT DID.*
 
-**A terminal-first AI Risk Operations Console for detecting contextual payment fraud.**
+**A real-time temporal relational intelligence gateway stopping coordinated fraud rings and card testing syndicates.**
 
 [![CI/CD](https://github.com/mohit4901/Vyuh/actions/workflows/verify.yml/badge.svg)](.github/workflows/verify.yml)
 [![Track](https://img.shields.io/badge/Razorpay_Buildathon_2026-Track_02:_AI_Risk_Manager-blue.svg)](https://razorpay.com/buildathon)
 [![License](https://img.shields.io/badge/License-Apache_2.0-green.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
 [![LightGBM](https://img.shields.io/badge/ML_Engine-LightGBM_GBDT-orange.svg)](https://lightgbm.readthedocs.io/)
 [![Zero Fake AI](https://img.shields.io/badge/Evaluation-118%2C108_Unseen_Holdout-success.svg)](#2-at-a-glance-verified-canonical-metrics)
 
 ---
 
-## ⚡ The Signature Experience: The Two Worlds
+## ⚡ The Signature Hook: The Two Worlds
+
+<div align="center">
+  <img src="assets/two_worlds_animated.svg" alt="The Two Worlds: Same Transaction, Different Context" width="100%"/>
+</div>
 
 ```text
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -23,33 +26,50 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   IDENTICAL TRANSACTION PAYLOAD (Bitwise Invariant):
-  Amount: ₹4,999.00  │  Card: CARD_TITANIUM_88  │  Merchant: Croma Electronics
-  Time:   14:02 IST  │  Customer: arjun.sharma@enterprise.in
+  Amount: ₹499.00  │  Card: CARD_A  │  Device: DEV_X  │  Email: user@corp.com
+  Time:   14:00 IST (Valid BIN, standard amount, normal shopping hour)
 
 ──────────────────────────────────────────────────────────────────────────────
 
-  WORLD A — CLEAN CONTEXT              WORLD B — CONNECTED CONTEXT
-  Dedicated personal device (1:1)      Same device cycled across 5 accounts
+  🟢 WORLD A — ISOLATED CONTEXT        🔴 WORLD B — FRAUD RING CONTEXT
+  Clean personal hardware (1:1 binding) 10 synthetic accounts in 30s on same hardware
 
-  RISK:     [██░░░░░░░░░░] 10.9%       RISK:     [████████████] 92.0%
-  DECISION: ✔ APPROVED (ALLOW)         DECISION: ⛔ HOLD (HUMAN REVIEW)
+  RISK:     [██░░░░░░░░░░] 10.9%       RISK:     [████████░░░░] 68.5%
+  DECISION: ✔ APPROVED (ALLOW)         DECISION: ⛔ FLAG (HUMAN REVIEW)
+  ACTION:   Frictionless 1-Click       ACTION:   Settlement Held + Forensic Brief
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                        THE TRANSACTION DIDN'T CHANGE.
-                              THE CONTEXT DID.
+                      THE TRANSACTION DIDN'T CHANGE.
+                            THE CONTEXT DID.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-> **Run this live in your terminal right now:**
-> ```bash
-> ./vyuh --two-worlds
-> ```
+> **"Traditional rule engines score the transaction in isolation. VYUH scores the temporal relational context."**
+
+---
+
+## 🚀 One-Command Execution (Zero Setup Required)
+
+Pick any single command to see the instant live proof:
+
+```bash
+# Option 1: Instant Signature Demo (Runs immediately with auto-dependency bootstrap)
+./demo
+
+# Option 2: Full Interactive Risk Operations Console
+./vyuh --demo
+
+# Option 3: Complete Production Isolated Stack via Docker
+docker compose up
+```
+
+*(No manual virtual environment setup, no multi-terminal coordination. `./demo` auto-detects dependencies and runs the live dual-context comparison in < 5 seconds).*
 
 ---
 
 ## Table of Contents
 
-- [0. Quickstart in 30 Seconds](#0-quickstart-in-30-seconds)
+- [0. Quickstart in 10 Seconds](#0-quickstart-in-10-seconds)
 - [1. Why Terminal-First by Design?](#1-why-terminal-first-by-design)
 - [2. At a Glance (Verified Canonical Metrics)](#2-at-a-glance-verified-canonical-metrics)
 - [3. Problem Statement & Why Now](#3-problem-statement--why-conventional-models-fail)
@@ -72,17 +92,14 @@
 
 ---
 
-## 0. Quickstart in 30 Seconds
+## 0. Quickstart in 10 Seconds
 
 ```bash
-# 1. Clone and enter repository
+# 1. Clone repository
 git clone https://github.com/mohit4901/Vyuh.git && cd Vyuh
 
-# 2. Run the interactive Risk Operations Console
-./vyuh
-
-# 3. Or launch the signature Two Worlds demonstration directly:
-./vyuh --two-worlds
+# 2. Run instant signature proof
+./demo
 ```
 
 ---
@@ -149,6 +166,10 @@ Holding the incoming raw transaction payload **100% bitwise invariant**, observe
 
 ## 2. At a Glance (Verified Canonical Metrics)
 
+<div align="center">
+  <img src="assets/benchmark_matrix.svg" alt="Executive Benchmark Scorecard" width="100%"/>
+</div>
+
 All numbers below are extracted directly from the verified canonical JSON artifacts (`models/checkpoints/final_incremental_value_study.json` and `models/checkpoints/final_latency_benchmark.json`):
 
 > **PR-AUC Baseline Anchor**: A random classifier on this 3.44%-fraud dataset achieves PR-AUC ≈ **0.034** (equal to the fraud base rate). VYUH M3 achieves **0.1456 — 4.28× above random**. The 481-feature offline research model achieves 0.4608 (13.5× above random) but requires >120ms multi-table joins unavailable at live checkout time, violating the sub-10ms SLA. The 3× gap is entirely explained by the 458 features that cannot be computed at transaction time. *(See Section 29 for detailed constraint analysis.)*
@@ -195,6 +216,10 @@ The primary evaluation dataset (IEEE-CIS Fraud Detection, 590,540 transactions) 
 ---
 
 ## 4. Core System Architecture
+
+<div align="center">
+  <img src="assets/architecture_pipeline.svg" alt="VYUH Four-Tier Hybrid Architecture Pipeline" width="100%"/>
+</div>
 
 VYUH is engineered as a **four-tier architecture** executing sub-10ms CPU inference. Note that Tier-4 is a **deterministic rule-based safety layer** that operates independently of the ML pipeline — it is fully documented and intentionally distinct from model inference:
 
