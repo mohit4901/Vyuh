@@ -1,0 +1,435 @@
+{
+  "metadata": {
+    "dataset": "IEEE-CIS Fraud Detection (Untouched Temporal Holdout)",
+    "test_sample_count": 118108,
+    "test_fraud_count": 4064,
+    "test_fraud_rate": 0.034409184813899145,
+    "total_fraud_loss_at_risk_inr": 609934.34,
+    "model": "Joint 23-Feature GBDT (joint_23feat_lgbm.pkl)",
+    "is_real_unseen_data": true
+  },
+  "operating_points": [
+    {
+      "threshold": 0.03,
+      "precision": 0.0908,
+      "recall": 0.5197,
+      "false_positive_rate": 0.1854,
+      "false_negative_rate": 0.4803,
+      "true_positives": 2112,
+      "false_positives": 21144,
+      "true_negatives": 92900,
+      "false_negatives": 1952,
+      "caught_fraud_amount_inr": 346895.6,
+      "uncaught_fraud_loss_inr": 263038.74,
+      "friction_cost_inr": 7400400.0,
+      "review_cost_inr": 2790720.0,
+      "total_business_cost_inr": 7663438.74,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 293710.5,
+        "fraud_lost_inr": 222710.35,
+        "friction_inr": 6265790.63,
+        "total_cost_inr": 6488500.98
+      }
+    },
+    {
+      "threshold": 0.05,
+      "precision": 0.143,
+      "recall": 0.3607,
+      "false_positive_rate": 0.0771,
+      "false_negative_rate": 0.6393,
+      "true_positives": 1466,
+      "false_positives": 8788,
+      "true_negatives": 105256,
+      "false_negatives": 2598,
+      "caught_fraud_amount_inr": 201673.66,
+      "uncaught_fraud_loss_inr": 408260.68,
+      "friction_cost_inr": 3075800.0,
+      "review_cost_inr": 1230480.0,
+      "total_business_cost_inr": 3484060.68,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 170753.6,
+        "fraud_lost_inr": 345667.25,
+        "friction_inr": 2604226.64,
+        "total_cost_inr": 2949893.89
+      }
+    },
+    {
+      "threshold": 0.08,
+      "precision": 0.1995,
+      "recall": 0.2537,
+      "false_positive_rate": 0.0363,
+      "false_negative_rate": 0.7463,
+      "true_positives": 1031,
+      "false_positives": 4138,
+      "true_negatives": 109906,
+      "false_negatives": 3033,
+      "caught_fraud_amount_inr": 111466.55,
+      "uncaught_fraud_loss_inr": 498467.78,
+      "friction_cost_inr": 1448300.0,
+      "review_cost_inr": 620280.0,
+      "total_business_cost_inr": 1946767.78,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 94376.8,
+        "fraud_lost_inr": 422044.05,
+        "friction_inr": 1226250.55,
+        "total_cost_inr": 1648294.6
+      }
+    },
+    {
+      "threshold": 0.1,
+      "precision": 0.2245,
+      "recall": 0.1956,
+      "false_positive_rate": 0.0241,
+      "false_negative_rate": 0.8044,
+      "true_positives": 795,
+      "false_positives": 2746,
+      "true_negatives": 111298,
+      "false_negatives": 3269,
+      "caught_fraud_amount_inr": 82843.8,
+      "uncaught_fraud_loss_inr": 527090.53,
+      "friction_cost_inr": 961100.0,
+      "review_cost_inr": 424920.0,
+      "total_business_cost_inr": 1488190.53,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 70142.41,
+        "fraud_lost_inr": 446278.43,
+        "friction_inr": 813746.74,
+        "total_cost_inr": 1260025.18
+      }
+    },
+    {
+      "threshold": 0.12,
+      "precision": 0.2514,
+      "recall": 0.156,
+      "false_positive_rate": 0.0166,
+      "false_negative_rate": 0.844,
+      "true_positives": 634,
+      "false_positives": 1888,
+      "true_negatives": 112156,
+      "false_negatives": 3430,
+      "caught_fraud_amount_inr": 65960.44,
+      "uncaught_fraud_loss_inr": 543973.89,
+      "friction_cost_inr": 660800.0,
+      "review_cost_inr": 302640.0,
+      "total_business_cost_inr": 1204773.89,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 55847.57,
+        "fraud_lost_inr": 460573.28,
+        "friction_inr": 559487.93,
+        "total_cost_inr": 1020061.21
+      }
+    },
+    {
+      "threshold": 0.15,
+      "precision": 0.2931,
+      "recall": 0.1058,
+      "false_positive_rate": 0.0091,
+      "false_negative_rate": 0.8942,
+      "true_positives": 430,
+      "false_positives": 1037,
+      "true_negatives": 113007,
+      "false_negatives": 3634,
+      "caught_fraud_amount_inr": 45117.63,
+      "uncaught_fraud_loss_inr": 564816.7,
+      "friction_cost_inr": 362950.0,
+      "review_cost_inr": 176040.0,
+      "total_business_cost_inr": 927766.7,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 38200.32,
+        "fraud_lost_inr": 478220.53,
+        "friction_inr": 307303.48,
+        "total_cost_inr": 785524.01
+      }
+    },
+    {
+      "threshold": 0.2,
+      "precision": 0.3531,
+      "recall": 0.0689,
+      "false_positive_rate": 0.0045,
+      "false_negative_rate": 0.9311,
+      "true_positives": 280,
+      "false_positives": 513,
+      "true_negatives": 113531,
+      "false_negatives": 3784,
+      "caught_fraud_amount_inr": 28980.38,
+      "uncaught_fraud_loss_inr": 580953.95,
+      "friction_cost_inr": 179550.0,
+      "review_cost_inr": 95160.0,
+      "total_business_cost_inr": 760503.95,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 24537.19,
+        "fraud_lost_inr": 491883.66,
+        "friction_inr": 152021.88,
+        "total_cost_inr": 643905.54
+      }
+    },
+    {
+      "threshold": 0.25,
+      "precision": 0.3903,
+      "recall": 0.0517,
+      "false_positive_rate": 0.0029,
+      "false_negative_rate": 0.9483,
+      "true_positives": 210,
+      "false_positives": 328,
+      "true_negatives": 113716,
+      "false_negatives": 3854,
+      "caught_fraud_amount_inr": 19105.53,
+      "uncaught_fraud_loss_inr": 590828.8,
+      "friction_cost_inr": 114800.0,
+      "review_cost_inr": 64560.0,
+      "total_business_cost_inr": 705628.8,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 16176.33,
+        "fraud_lost_inr": 500244.52,
+        "friction_inr": 97199.17,
+        "total_cost_inr": 597443.7
+      }
+    },
+    {
+      "threshold": 0.3,
+      "precision": 0.4139,
+      "recall": 0.0396,
+      "false_positive_rate": 0.002,
+      "false_negative_rate": 0.9604,
+      "true_positives": 161,
+      "false_positives": 228,
+      "true_negatives": 113816,
+      "false_negatives": 3903,
+      "caught_fraud_amount_inr": 14965.9,
+      "uncaught_fraud_loss_inr": 594968.43,
+      "friction_cost_inr": 79800.0,
+      "review_cost_inr": 46680.0,
+      "total_business_cost_inr": 674768.43,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 12671.37,
+        "fraud_lost_inr": 503749.48,
+        "friction_inr": 67565.28,
+        "total_cost_inr": 571314.76
+      }
+    },
+    {
+      "threshold": 0.35,
+      "precision": 0.4393,
+      "recall": 0.0303,
+      "false_positive_rate": 0.0014,
+      "false_negative_rate": 0.9697,
+      "true_positives": 123,
+      "false_positives": 157,
+      "true_negatives": 113887,
+      "false_negatives": 3941,
+      "caught_fraud_amount_inr": 10653.12,
+      "uncaught_fraud_loss_inr": 599281.22,
+      "friction_cost_inr": 54950.0,
+      "review_cost_inr": 33600.0,
+      "total_business_cost_inr": 654231.22,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 9019.81,
+        "fraud_lost_inr": 507401.04,
+        "friction_inr": 46525.21,
+        "total_cost_inr": 553926.25
+      }
+    },
+    {
+      "threshold": 0.4,
+      "precision": 0.4623,
+      "recall": 0.0226,
+      "false_positive_rate": 0.0009,
+      "false_negative_rate": 0.9774,
+      "true_positives": 92,
+      "false_positives": 107,
+      "true_negatives": 113937,
+      "false_negatives": 3972,
+      "caught_fraud_amount_inr": 7673.06,
+      "uncaught_fraud_loss_inr": 602261.28,
+      "friction_cost_inr": 37450.0,
+      "review_cost_inr": 23880.0,
+      "total_business_cost_inr": 639711.28,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 6496.64,
+        "fraud_lost_inr": 509924.2,
+        "friction_inr": 31708.27,
+        "total_cost_inr": 541632.47
+      }
+    },
+    {
+      "threshold": 0.45,
+      "precision": 0.5441,
+      "recall": 0.0182,
+      "false_positive_rate": 0.0005,
+      "false_negative_rate": 0.9818,
+      "true_positives": 74,
+      "false_positives": 62,
+      "true_negatives": 113982,
+      "false_negatives": 3990,
+      "caught_fraud_amount_inr": 6501.4,
+      "uncaught_fraud_loss_inr": 603432.94,
+      "friction_cost_inr": 21700.0,
+      "review_cost_inr": 16320.0,
+      "total_business_cost_inr": 625132.94,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 5504.62,
+        "fraud_lost_inr": 510916.23,
+        "friction_inr": 18373.01,
+        "total_cost_inr": 529289.24
+      }
+    },
+    {
+      "threshold": 0.5,
+      "precision": 0.5818,
+      "recall": 0.0157,
+      "false_positive_rate": 0.0004,
+      "false_negative_rate": 0.9843,
+      "true_positives": 64,
+      "false_positives": 46,
+      "true_negatives": 113998,
+      "false_negatives": 4000,
+      "caught_fraud_amount_inr": 5271.33,
+      "uncaught_fraud_loss_inr": 604663.0,
+      "friction_cost_inr": 16100.0,
+      "review_cost_inr": 13200.0,
+      "total_business_cost_inr": 620763.0,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 4463.15,
+        "fraud_lost_inr": 511957.7,
+        "friction_inr": 13631.59,
+        "total_cost_inr": 525589.29
+      }
+    },
+    {
+      "threshold": 0.55,
+      "precision": 0.6053,
+      "recall": 0.0113,
+      "false_positive_rate": 0.0003,
+      "false_negative_rate": 0.9887,
+      "true_positives": 46,
+      "false_positives": 30,
+      "true_negatives": 114014,
+      "false_negatives": 4018,
+      "caught_fraud_amount_inr": 3925.05,
+      "uncaught_fraud_loss_inr": 606009.28,
+      "friction_cost_inr": 10500.0,
+      "review_cost_inr": 9120.0,
+      "total_business_cost_inr": 616509.28,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 3323.27,
+        "fraud_lost_inr": 513097.57,
+        "friction_inr": 8890.17,
+        "total_cost_inr": 521987.74
+      }
+    },
+    {
+      "threshold": 0.6,
+      "precision": 0.6491,
+      "recall": 0.0091,
+      "false_positive_rate": 0.0002,
+      "false_negative_rate": 0.9909,
+      "true_positives": 37,
+      "false_positives": 20,
+      "true_negatives": 114024,
+      "false_negatives": 4027,
+      "caught_fraud_amount_inr": 2785.03,
+      "uncaught_fraud_loss_inr": 607149.31,
+      "friction_cost_inr": 7000.0,
+      "review_cost_inr": 6840.0,
+      "total_business_cost_inr": 614149.31,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 2358.03,
+        "fraud_lost_inr": 514062.82,
+        "friction_inr": 5926.78,
+        "total_cost_inr": 519989.6
+      }
+    },
+    {
+      "threshold": 0.65,
+      "precision": 0.7714,
+      "recall": 0.0066,
+      "false_positive_rate": 0.0001,
+      "false_negative_rate": 0.9934,
+      "true_positives": 27,
+      "false_positives": 8,
+      "true_negatives": 114036,
+      "false_negatives": 4037,
+      "caught_fraud_amount_inr": 1865.06,
+      "uncaught_fraud_loss_inr": 608069.28,
+      "friction_cost_inr": 2800.0,
+      "review_cost_inr": 4200.0,
+      "total_business_cost_inr": 610869.28,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 1579.11,
+        "fraud_lost_inr": 514841.73,
+        "friction_inr": 2370.71,
+        "total_cost_inr": 517212.45
+      }
+    },
+    {
+      "threshold": 0.7,
+      "precision": 0.8077,
+      "recall": 0.0052,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.9948,
+      "true_positives": 21,
+      "false_positives": 5,
+      "true_negatives": 114039,
+      "false_negatives": 4043,
+      "caught_fraud_amount_inr": 1481.81,
+      "uncaught_fraud_loss_inr": 608452.53,
+      "friction_cost_inr": 1750.0,
+      "review_cost_inr": 3120.0,
+      "total_business_cost_inr": 610202.53,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 1254.62,
+        "fraud_lost_inr": 515166.23,
+        "friction_inr": 1481.69,
+        "total_cost_inr": 516647.92
+      }
+    },
+    {
+      "threshold": 0.75,
+      "precision": 0.7727,
+      "recall": 0.0042,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.9958,
+      "true_positives": 17,
+      "false_positives": 5,
+      "true_negatives": 114039,
+      "false_negatives": 4047,
+      "caught_fraud_amount_inr": 968.16,
+      "uncaught_fraud_loss_inr": 608966.17,
+      "friction_cost_inr": 1750.0,
+      "review_cost_inr": 2640.0,
+      "total_business_cost_inr": 610716.17,
+      "scaled_monthly_100k": {
+        "fraud_saved_inr": 819.73,
+        "fraud_lost_inr": 515601.12,
+        "friction_inr": 1481.69,
+        "total_cost_inr": 517082.82
+      }
+    }
+  ],
+  "merchant_profiles": {
+    "high_ticket_electronics": {
+      "name": "High-Ticket Electronics & Travel",
+      "description": "High ticket exposure (\u20b925,000 AOV). Fraud losses are catastrophic; higher OTP friction is tolerated.",
+      "avg_order_value_inr": 25000.0,
+      "friction_cost_per_fp_inr": 800.0,
+      "recommended_threshold": 0.1,
+      "rationale": "Operating at threshold 0.10 captures ~20% of fraud attacks with low false alarm impact relative to multi-thousand-rupee chargebacks."
+    },
+    "low_ticket_commerce": {
+      "name": "Low-Ticket High-Velocity Commerce",
+      "description": "Low ticket (\u20b9350 AOV, e.g. quick commerce, gaming). Checkout drop-offs cost more than occasional fraud.",
+      "avg_order_value_inr": 350.0,
+      "friction_cost_per_fp_inr": 120.0,
+      "recommended_threshold": 0.4,
+      "rationale": "Operating at threshold 0.40 minimizes customer interruptions (FPR < 0.1%), protecting conversion rate."
+    },
+    "cold_start_merchant": {
+      "name": "Balanced Enterprise Merchant",
+      "description": "Balanced retail merchant (\u20b91,850 AOV). Standard Razorpay Gateway operating point.",
+      "avg_order_value_inr": 1850.0,
+      "friction_cost_per_fp_inr": 350.0,
+      "recommended_threshold": 0.2,
+      "rationale": "Optimal cost balance on held-out test distribution between caught fraud and false positive customer friction."
+    }
+  }
+}

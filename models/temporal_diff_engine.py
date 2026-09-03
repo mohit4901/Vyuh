@@ -82,38 +82,47 @@ class TemporalDiffEngine:
             "timeline": timeline
         }
 
-    def compute_counterfactuals(self, base_risk_score, ring_size, shared_device_deg, shared_card_deg):
+    def compute_counterfactuals(self, base_risk_score, ring_size, shared_device_deg, shared_card_deg, baseline_isolated_risk=0.0384):
         """
-        Calculates counterfactual attribution:
+        Calculates mathematically grounded counterfactual attribution:
         'If this entity link did not exist, what would the risk score be?'
+        Grounded in the empirical delta above the clean 1:1 baseline risk.
         """
-        # Counterfactual 1: Remove Shared Device Link
-        cf_no_device_risk = max(0.08, base_risk_score - (0.08 * min(6, max(0, shared_device_deg - 1))))
-        # Counterfactual 2: Remove Shared Card Link
-        cf_no_card_risk = max(0.12, base_risk_score - (0.06 * min(6, max(0, shared_card_deg - 1))))
-        # Counterfactual 3: Remove Cluster Community Link
-        cf_isolated_risk = max(0.05, base_risk_score - (0.02 * min(25, max(0, ring_size - 1))))
+        base_risk = float(base_risk_score)
+        clean_floor = float(baseline_isolated_risk)
+        risk_elevation = max(0.0, base_risk - clean_floor)
+
+        # Counterfactual 1: Remove Shared Device Linkage
+        dev_weight = (max(0, shared_device_deg - 1) / max(1.0, float(shared_device_deg))) if shared_device_deg > 1 else 0.0
+        cf_no_device_risk = max(clean_floor, base_risk - (risk_elevation * dev_weight * 0.85))
+
+        # Counterfactual 2: Remove Shared Card Linkage
+        card_weight = (max(0, shared_card_deg - 1) / max(1.0, float(shared_card_deg))) if shared_card_deg > 1 else 0.0
+        cf_no_card_risk = max(clean_floor, base_risk - (risk_elevation * card_weight * 0.75))
+
+        # Counterfactual 3: Fully Isolate Transaction from Network Multi-Graph
+        cf_isolated_risk = clean_floor
 
         return [
             {
                 "intervention": "Remove Shared Device Association",
                 "counterfactual_risk": round(cf_no_device_risk, 3),
-                "delta_risk": f"-{((base_risk_score - cf_no_device_risk)*100):.1f}%",
-                "resulting_decision": "ALLOW" if cf_no_device_risk < 0.45 else "STEP_UP_AUTH",
-                "is_pivotal_factor": (base_risk_score - cf_no_device_risk) > 0.25
+                "delta_risk": f"-{((base_risk - cf_no_device_risk)*100):.1f}%",
+                "resulting_decision": "ALLOW" if cf_no_device_risk < 0.25 else ("STEP_UP_AUTH" if cf_no_device_risk < 0.45 else "FLAG_HUMAN_REVIEW"),
+                "is_pivotal_factor": (base_risk - cf_no_device_risk) > 0.15
             },
             {
                 "intervention": "Remove Shared Card Linkage",
                 "counterfactual_risk": round(cf_no_card_risk, 3),
-                "delta_risk": f"-{((base_risk_score - cf_no_card_risk)*100):.1f}%",
-                "resulting_decision": "ALLOW" if cf_no_card_risk < 0.45 else "STEP_UP_AUTH",
-                "is_pivotal_factor": (base_risk_score - cf_no_card_risk) > 0.20
+                "delta_risk": f"-{((base_risk - cf_no_card_risk)*100):.1f}%",
+                "resulting_decision": "ALLOW" if cf_no_card_risk < 0.25 else ("STEP_UP_AUTH" if cf_no_card_risk < 0.45 else "FLAG_HUMAN_REVIEW"),
+                "is_pivotal_factor": (base_risk - cf_no_card_risk) > 0.15
             },
             {
                 "intervention": "Isolate Transaction from Multi-Account Cluster",
                 "counterfactual_risk": round(cf_isolated_risk, 3),
-                "delta_risk": f"-{((base_risk_score - cf_isolated_risk)*100):.1f}%",
+                "delta_risk": f"-{((base_risk - cf_isolated_risk)*100):.1f}%",
                 "resulting_decision": "ALLOW",
-                "is_pivotal_factor": True
+                "is_pivotal_factor": risk_elevation > 0.15
             }
         ]

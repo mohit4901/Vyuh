@@ -1,0 +1,39 @@
+name: VYUH Verification & Parity CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  verify:
+    name: Parity & Stream Evolution Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 1. Verify Online / Offline Mathematical Parity
+        run: python tests/test_online_offline_parity.py
+
+      - name: 2. Verify Stream Evolution & Replay Attack Gates
+        run: python tests/test_stream_evolution.py
+
+      - name: 3. Verify Failure Injection & Bounded Recovery
+        run: python tests/test_failure_injection.py
+
+      - name: 4. Automated Submission Validation Suite
+        run: python benchmarks/final_submission_validation.py

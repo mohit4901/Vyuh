@@ -69,7 +69,7 @@ def run_parity_test(n_samples=100):
         # 1. Live Production Inference
         live_res = manager.score_transaction(raw_payload)
         prob_tab_live = live_res["scores"]["pTabular"]
-        prob_joint_live = live_res["scores"]["finalCalibratedRisk"]
+        prob_joint_live = live_res["scores"].get("pJointModel", live_res["scores"]["finalCalibratedRisk"])
 
         # 2. Extract dynamically constructed feature vectors
         tab_feat_dict = live_res["provenance"]["tabular_feature_values"]

@@ -28,6 +28,7 @@ data/processed/
 # Ignore generic pkl files (data, caches), but whitelist model checkpoints
 *.pkl
 !models/checkpoints/*.pkl
+!models/checkpoints/*.txt
 
 # Large deep learning weights (>100MB exceeds GitHub limits)
 models/checkpoints/*.pt
@@ -48,6 +49,7 @@ models/checkpoints/*.bin
 Thumbs.db
 .matplotlib/
 dist/
+*.zip
 
 # Jupyter
 .ipynb_checkpoints/

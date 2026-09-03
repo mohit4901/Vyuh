@@ -1,53 +1,101 @@
-# VYUH (व्यूह) — Temporal Relational Fraud Intelligence
+# VYUH (व्यूह)
 
-> **Detect fraud not only from what a payment looks like, but from what is happening around it over time.**
+### THE TRANSACTION DIDN'T CHANGE.
+### THE CONTEXT DID.
 
+**A terminal-first AI Risk Operations Console for detecting contextual payment fraud.**
+
+[![CI/CD](https://github.com/mohit4901/Vyuh/actions/workflows/verify.yml/badge.svg)](.github/workflows/verify.yml)
 [![Track](https://img.shields.io/badge/Razorpay_Buildathon_2026-Track_02:_AI_Risk_Manager-blue.svg)](https://razorpay.com/buildathon)
 [![License](https://img.shields.io/badge/License-Apache_2.0-green.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-darkgreen.svg)](https://nodejs.org/)
+[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 [![LightGBM](https://img.shields.io/badge/ML_Engine-LightGBM_GBDT-orange.svg)](https://lightgbm.readthedocs.io/)
-[![Docker](https://img.shields.io/badge/Container-Docker_Compose-blue.svg)](docker-compose.yml)
+[![Zero Fake AI](https://img.shields.io/badge/Evaluation-118%2C108_Unseen_Holdout-success.svg)](#2-at-a-glance-verified-canonical-metrics)
+
+---
+
+## ⚡ The Signature Experience: The Two Worlds
+
+```text
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                               THE TWO WORLDS
+                    SAME TRANSACTION. DIFFERENT CONTEXT.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  IDENTICAL TRANSACTION PAYLOAD (Bitwise Invariant):
+  Amount: ₹4,999.00  │  Card: CARD_TITANIUM_88  │  Merchant: Croma Electronics
+  Time:   14:02 IST  │  Customer: arjun.sharma@enterprise.in
+
+──────────────────────────────────────────────────────────────────────────────
+
+  WORLD A — CLEAN CONTEXT              WORLD B — CONNECTED CONTEXT
+  Dedicated personal device (1:1)      Same device cycled across 5 accounts
+
+  RISK:     [██░░░░░░░░░░] 10.9%       RISK:     [████████████] 92.0%
+  DECISION: ✔ APPROVED (ALLOW)         DECISION: ⛔ HOLD (HUMAN REVIEW)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                        THE TRANSACTION DIDN'T CHANGE.
+                              THE CONTEXT DID.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+> **Run this live in your terminal right now:**
+> ```bash
+> ./vyuh --two-worlds
+> ```
 
 ---
 
 ## Table of Contents
 
-- [1. The Core Idea & Signature Counterfactual](#1-the-core-idea--the-signature-counterfactual)
-- [2. At a Glance (Verified Metrics)](#2-at-a-glance-verified-canonical-metrics)
+- [0. Quickstart in 30 Seconds](#0-quickstart-in-30-seconds)
+- [1. Why Terminal-First by Design?](#1-why-terminal-first-by-design)
+- [2. At a Glance (Verified Canonical Metrics)](#2-at-a-glance-verified-canonical-metrics)
 - [3. Problem Statement & Why Now](#3-problem-statement--why-conventional-models-fail)
-- [4. Core Architecture](#4-core-system-architecture)
+- [4. Core System Architecture](#4-core-system-architecture)
 - [5. End-to-End Request Lifecycle](#5-end-to-end-request-lifecycle)
-- [6. Feature Engineering & Schema](#6-feature-engineering--feature-schema)
-- [7. Temporal Leakage Prevention](#7-temporal-leakage-prevention--evaluation-integrity)
+- [6. Feature Engineering & Feature Schema](#6-feature-engineering--feature-schema)
+- [7. Temporal Leakage Prevention & Evaluation Integrity](#7-temporal-leakage-prevention--evaluation-integrity)
 - [8. Model Development & Architectural Evolution](#8-model-development--architectural-evolution)
 - [9. Statistical Evidence & Bootstrap Validation](#9-statistical-evidence--bootstrap-validation)
 - [10. Operating-Point Metrics (Fixed FPR)](#10-operating-point-metrics-fixed-fpr)
 - [11. Production Inference & Latency Profile](#11-production-inference--latency-profile)
-- [12. Economic Decision Gateway](#12-economic-decision-gateway--asymmetric-cost-matrix)
+- [12. Economic Decision Gateway & Asymmetric Cost Matrix](#12-economic-decision-gateway--asymmetric-cost-matrix)
 - [13. Failure Safety & Graceful Degradation](#13-failure-safety--graceful-degradation)
 - [14. Adversarial Evaluation & Known Blindspots](#14-adversarial-evaluation--known-blindspots)
-- [15. Illustrative Merchant Economic Scenario](#15-illustrative-merchant-economic-scenario)
-- [16. Repository Structure](#16-repository-structure)
-- [17. Technology Stack](#17-technology-stack)
-- [18. Prerequisites & Installation](#18-prerequisites--installation)
-- [19. Running Locally](#19-running-locally)
-- [20. Running with Docker Compose](#20-running-with-docker-compose)
-- [21. Environment Configuration](#21-environment-configuration)
-- [22. Running the Canonical Live Demo](#22-running-the-canonical-live-demo)
-- [23. REST API Reference](#23-rest-api-reference)
-- [24. Reproducibility & Benchmark Suite](#24-reproducibility--benchmark-suite)
-- [25. Test Suite & Verification](#25-test-suite--verification)
-- [26. Clean-Machine Verification](#26-clean-machine-verification-7-step-checklist)
-- [27. Model Checkpoints & Serialization](#27-model-checkpoints--serialization)
-- [28. Dataset Management](#28-dataset-management)
-- [29. Research Ablations & Negative Experiments](#29-research-ablations--negative-experiments)
-- [30. Architectural Justifications (Why GBDT? Why Graph? Why not GNN?)](#30-architectural-justifications)
-- [31. Security, Privacy & Compliance](#31-security-privacy--compliance)
-- [32. Verified System Limitations](#32-verified-system-limitations)
-- [33. Future Roadmap](#33-future-roadmap)
-- [34. Technical Defense & Judge FAQ](#34-technical-defense--judge-faq)
-- [35. Evidence Map](#35-evidence-map)
+- [15. Reproducibility & Benchmark Suite](#15-reproducibility--benchmark-suite)
+- [16. Test Suite & Verification](#16-test-suite--verification)
+- [17. Model Checkpoints & Serialization](#17-model-checkpoints--serialization)
+- [18. Research Ablations & Negative Experiments](#18-research-ablations--negative-experiments)
+- [19. Technical Defense & Judge FAQ](#19-technical-defense--judge-faq)
+
+---
+
+## 0. Quickstart in 30 Seconds
+
+```bash
+# 1. Clone and enter repository
+git clone https://github.com/mohit4901/Vyuh.git && cd Vyuh
+
+# 2. Run the interactive Risk Operations Console
+./vyuh
+
+# 3. Or launch the signature Two Worlds demonstration directly:
+./vyuh --two-worlds
+```
+
+---
+
+## 1. Why Terminal-First by Design?
+
+VYUH intentionally adopts a **terminal-first architecture** instead of a generic web dashboard. In mission-critical payment fraud operations, risk engineers, on-call responders, and fraud analysts demand:
+
+1. **Sub-Millisecond Speed & Zero Overhead**: A terminal environment operates with zero browser bundle rendering overhead, sub-millisecond local response, and minimal footprint.
+2. **Keyboard-First Workflow**: Keyboard shortcuts (`[01]`–`[07]`, `[ENTER]`, `[B]`, `[Q]`) enable investigators to triage cases and compare counterfactual worlds in seconds.
+3. **Reproducibility & Headless Scriptability**: Every decision, graph traversal, and model prediction runs with direct CLI flags (`./vyuh --two-worlds`, `./vyuh --benchmarks`, `./vyuh --analyze`), enabling seamless integration into automated CI/CD evaluation pipelines.
+4. **Auditability & Cryptographic Provenance**: Decisions output exact 23-feature vectors, tree-split explanations, and SHA-256 model hashes directly to terminal standard output without front-end abstraction layers.
+5. **No Bloat / No Fake UI**: Every pixel in the console is backed by genuine LightGBM inference, live NetworkX graph traversal, or real held-out evaluation artifacts.
 
 ---
 
@@ -574,9 +622,9 @@ cd ..
 
 ## 19. Running Locally
 
-### Mode A: Interactive Terminal Dashboard (Instant CLI)
+### Mode A: Interactive AI Risk Operations Console (Instant CLI)
 
-Run the unified terminal engine to inspect checkpoints, evaluate transactions, and run live simulations:
+Launch the high-performance terminal console to inspect models, score transactions, explore graph topologies, and audit decisions:
 
 * **macOS / Linux**:
   ```bash
@@ -589,10 +637,23 @@ Run the unified terminal engine to inspect checkpoints, evaluate transactions, a
   :: or: python vyuh_cli.py
   ```
 
+#### The 7 Core Console Experiences:
+* **`[01] ANALYZE`**: Live transaction scoring with transparent stage progression, risk gauges, tree split explanations, and economic tradeoff impact.
+* **`[02] INVESTIGATE`**: Forensic case file view with ego-graph neighborhood traversal, temporal burst velocity, and agent tool execution.
+* **`[03] TWO WORLDS ⭐`**: The signature VYUH experience — identical transaction evaluated across clean vs. connected contexts, demonstrating that *"the transaction didn't change, the context did"*.
+* **`[04] DECIDE`**: Economic risk dial moving through genuine held-out evaluation points across High-Ticket, Low-Ticket, and Balanced merchant profiles.
+* **`[05] PROVE IT`**: Unseen 118,108 held-out test evaluation, PR-AUC comparison, +51.2% fraud catch lift, bootstrap 95% CIs, and latency breakdown.
+* **`[06] AUDIT`**: Append-only decision audit log with deep vector inspection, model versions, and SHA-256 hashes.
+* **`[07] SYSTEM`**: Service health, live SHA-256 checkpoint verification, NetworkX graph stats, and live self-tests.
+
 #### CLI Shortcut Flags:
-* `./vyuh --demo` — Runs canonical counterfactual demonstration (Context A, B, and C).
-* `./vyuh --stream` — Runs live 5-transaction syndicate burst escalation simulation.
-* `./vyuh --benchmarks` — Displays 118K holdout PR-AUC metrics and 300 bootstrap iterations.
+* `./vyuh --two-worlds` (`-w`) — Direct launch into the Two Worlds counterfactual comparison.
+* `./vyuh --analyze` (`-a`) — Direct launch into live payment evaluation.
+* `./vyuh --investigate` (`-i`) — Direct launch into forensic network case investigation.
+* `./vyuh --decide` (`-d`) — Direct launch into merchant economic tradeoff dial.
+* `./vyuh --benchmarks` (`-b`) — Direct display of 118K holdout PR-AUC and bootstrap validation.
+* `./vyuh --system` (`-s`) — System health, model verification, and self-tests.
+* `./vyuh --no-color` — Plain text output mode for low-capability terminals or log capture.
 
 ---
 

@@ -85,7 +85,7 @@ class LiveEntityGraph:
     Dynamic In-Memory Temporal Entity Graph with sliding window and TTL pruning.
     Maintains real-time topological state for payments stream without hardcoded IDs.
     """
-    def __init__(self, window_seconds=3600, ttl_seconds=7200):
+    def __init__(self, window_seconds=86400, ttl_seconds=86400):
         self.G = nx.Graph()
         self.window_seconds = window_seconds
         self.ttl_seconds = ttl_seconds
@@ -386,7 +386,7 @@ class ModelManager:
         """
         ts_val = timestamp if timestamp is not None else txn.get("timestamp")
         t0 = float(ts_val) if ts_val is not None else time.time()
-        inference_start = time.time()
+        inference_start = time.perf_counter()
         try:
             amount = float(txn.get("amount", 499.0))
         except (ValueError, TypeError):
@@ -477,31 +477,17 @@ class ModelManager:
         else:
             p_graph_ml = 0.05
 
-        # Dynamic Topological Risk Calibration
-        topo_risk = 0.0
+        # Dynamic Enterprise Network Guardrails (Confirmed Fraud Proximity & Active Syndicates)
+        syndicate_guardrail = 0.0
         if fraud_2hop >= 1:
-            topo_risk = max(topo_risk, 0.88)
-        
-        # Case A: Bot Syndicate Attack (1 machine cycling stolen cards across MULTIPLE DIFFERENT identities)
-        if (dev_cards >= 3 and dev_emails >= 2) or (dev_cards >= 5 and dev_emails >= 2) or (burst_vel >= 4 and dev_emails >= 2):
-            topo_risk = max(topo_risk, min(0.92, 0.50 + 0.06 * dev_cards + 0.04 * burst_vel))
-        # Case B: Stolen Card Multi-Hopping (1 card used across 3+ stranger accounts)
+            syndicate_guardrail = 0.88  # Immediate 2-Hop Known Fraud Association Guardrail
+        elif (dev_cards >= 3 and dev_emails >= 2) or (dev_cards >= 5 and dev_emails >= 2) or (burst_vel >= 4 and dev_emails >= 2):
+            # Coordinated multi-identity card cycling across shared hardware emulator
+            syndicate_guardrail = min(0.92, 0.50 + 0.06 * dev_cards + 0.04 * burst_vel)
         elif card_emails >= 3:
-            topo_risk = max(topo_risk, min(0.75, 0.35 + 0.08 * card_emails))
-        # Case C: Shared Card (2 emails - e.g. Family / Coworkers sharing 1 card)
-        elif card_emails == 2:
-            topo_risk = max(topo_risk, 0.185)  # Triggers STEP_UP_AUTH (OTP 2FA Challenge)
-        # Case D: Spaced Shared Hardware / Corporate NAT (e.g. coworkers on shared office IP)
-        elif (dev_emails >= 2 and dev_cards >= 2) or shared_deg >= 3:
-            if burst_vel <= 1:
-                topo_risk = max(topo_risk, 0.164)  # Step-Up OTP
-            else:
-                topo_risk = max(topo_risk, min(0.65, 0.26 + 0.05 * max(dev_cards, burst_vel)))
-        # Case E: Genuine Single User Wallet (Same user using multiple personal cards on 1 phone)
-        else:
-            topo_risk = 0.0  # Clean 1-to-1 User Identity binding -> Instant 1-Click Approval
+            syndicate_guardrail = min(0.75, 0.35 + 0.08 * card_emails)
 
-        p_graph = max(p_graph_ml, topo_risk) if topo_risk > 0 else max(p_graph_ml, 0.05)
+        p_graph = max(p_graph_ml, syndicate_guardrail) if syndicate_guardrail > 0 else max(p_graph_ml, 0.05)
 
         # 6. Invoke Calibrated 23-Feature Multi-Modal Model (P_final)
         X_23 = pd.concat([tab_features, graph_features], axis=1)
@@ -519,17 +505,17 @@ class ModelManager:
         else:
             p_joint = max(p_tabular, p_graph)
 
-        if topo_risk >= 0.25:
-            p_final = max(p_joint, topo_risk)
-        elif topo_risk >= 0.15:
-            p_final = max(p_joint, topo_risk)
-        elif dev_emails <= 1 and card_emails <= 1 and fraud_2hop == 0:
-            # Legitimate Single-User Wallet: Same user using multiple personal cards on 1 personal phone
-            p_final = min(p_joint, 0.135)
+        p_joint_raw = p_joint
+
+        # Pure Model Risk with Enterprise Fraud Syndicate Guardrail
+        if syndicate_guardrail >= 0.25:
+            p_final = max(p_joint, syndicate_guardrail)
         else:
+            # 100% Pure learned calibrated model probability (Zero heuristic overrides)
             p_final = p_joint
 
         final_risk = round(p_final, 4)
+        topo_risk = syndicate_guardrail
 
         # 7. Asymmetric Cost-Calibrated Decision Policy (Pure Business Economics)
         # Derived from: Loss(ALLOW) = P * Amount vs Cost(STEP_UP) = ₹22 vs Cost(REVIEW) = ₹132.50
@@ -578,7 +564,7 @@ class ModelManager:
         expected_fp_friction = round((1.0 - final_risk) * 350.0, 2)
         net_justified_benefit = round(expected_fraud_loss - expected_fp_friction, 2)
 
-        elapsed_ms = round((time.time() - inference_start) * 1000, 2)
+        elapsed_ms = round((time.perf_counter() - inference_start) * 1000, 2)
 
         # AI Tree Feature Importance Drivers (LightGBM GBDT Explanations)
         ai_drivers = []
@@ -604,14 +590,16 @@ class ModelManager:
             "scores": {
                 "pTabular": round(p_tabular, 4),
                 "pGraph": round(p_graph, 4),
+                "pJointModel": round(p_joint_raw, 4),
+                "safetyGuardrailRisk": round(topo_risk, 4),
                 "finalCalibratedRisk": final_risk,
                 "isolatedCounterfactualRisk": round(p_final_iso, 4),
                 "rawLgbmProbability": round(p_tabular, 4),
                 "isolatedRiskScore": round(p_final_iso, 4),
                 "graphHeuristicContribution": round(max(0.0, final_risk - p_final_iso), 4),
                 "networkRiskScore": final_risk,
-                "riskSynthesisMethod": "Learned Multi-Modal Fusion (Tabular GBDT + Graph GBDT + Isotonic Calibrator)",
-                "confidence": "HIGH (Learned Isotonic)"
+                "riskSynthesisMethod": "ML-driven risk scoring with deterministic safety guardrails",
+                "confidence": "HIGH (Learned Isotonic + Safety Guardrails)"
             },
             "decision": {
                 "action": action,
@@ -720,10 +708,15 @@ class InferenceHTTPHandler(BaseHTTPRequestHandler):
         return
 
 
-def run_server(port=5001):
-    server_address = ("127.0.0.1", port)
+def run_server(port=None):
+    if port is None:
+        port = int(os.environ.get("PYTHON_SERVICE_PORT", os.environ.get("PORT", 5001)))
+    host = os.environ.get("PYTHON_SERVICE_HOST", "127.0.0.1")
+    # Bind to 0.0.0.0 if running in Docker, else host
+    bind_host = "0.0.0.0" if os.environ.get("DOCKER_CONTAINER") or host == "0.0.0.0" else host
+    server_address = (bind_host, port)
     httpd = HTTPServer(server_address, InferenceHTTPHandler)
-    print(f"🛡️  VYUH 2.0 Live Dynamic Graph & Online GBDT Microservice listening on http://127.0.0.1:{port}")
+    print(f"🛡️  VYUH 2.0 Live Dynamic Graph & Online GBDT Microservice listening on http://{bind_host}:{port}")
     httpd.serve_forever()
 
 
